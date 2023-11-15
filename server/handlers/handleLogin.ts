@@ -6,6 +6,10 @@ export const handleLogin = async (req, res) => {
     const user = await prisma.user.findUnique({
         where: {
             email: req.body.email,
+        },
+        include: {
+            Seller: true,
+            Order: true,
         }
     });
 
@@ -38,7 +42,9 @@ export const handleLogin = async (req, res) => {
         email: user.email,
         first_name: user.first_name,
         last_name: user.last_name,
-        role: user.role
+        role: user.role,
+        Seller: user.Seller,
+        Order: user.Order,
     }
 
     //create a secure cookie with refresh token

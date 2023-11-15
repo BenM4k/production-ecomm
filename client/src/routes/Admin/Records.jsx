@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { selectProductsResult } from '../../redux/slices/products/productSlice';
+import { selectCategoriesResult } from '../../redux/slices/category/category';
 import { FaUser, FaClipboardCheck, FaImage } from 'react-icons/fa';
 import {TbCategory} from 'react-icons/tb';
 import {BsFillBagCheckFill} from 'react-icons/bs';
@@ -6,9 +8,9 @@ import {BsFillBagCheckFill} from 'react-icons/bs';
 const Records = () => {
     const orders =[]
     const banners = []
-    const categories = []
+    const categories = useSelector(selectCategoriesResult)?.data?.categories;
     const users = [];
-    const products = []
+    const products = useSelector(selectProductsResult)?.data?.products;
 
   return (
     <ul className="content-header">
@@ -19,22 +21,22 @@ const Records = () => {
         </li>
         <li>
             <TbCategory />
-            <p>{categories.length}</p>
+            <p>{categories?.length}</p>
             <span>Categories</span>
         </li>
         <li>
             <FaClipboardCheck />
-            <p>{orders.length}</p>
+            <p>{orders?.length}</p>
             <span>Orders</span>
         </li>
         <li>
             <FaImage />
-            <p>{banners.length}</p>
+            <p>{banners?.length}</p>
             <span>Banners</span>
         </li>
         <li>
             <BsFillBagCheckFill />
-            <p>{products.length}</p>
+            <p>{products?.length}</p>
             <span>Products</span>
         </li>
     </ul>
