@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { selectAllProducts } from '../../redux/slices/products/productSlice'
+import { selectProductsResult } from '../../redux/slices/products/productSlice'
 import { NavLink, useParams } from "react-router-dom";
 import Suggested from "./Suggested";
 import Feedback from "./Feedback";
@@ -7,7 +7,7 @@ import ProductImage from "./ProductImage";
 
 const Product = () => {
   const { id } = useParams();
-  const products = useSelector(selectAllProducts);
+  const products = useSelector(selectProductsResult)?.data?.products;
   const product = products.find((p) => p.id === id);
   const suggested = products.filter((p) => p.category === product.category && p.id !== product.id)
 
@@ -18,9 +18,9 @@ const Product = () => {
           <div className="nav">
             <NavLink to='/store'>Browse All </NavLink>
             <NavLink to='/categories'> Category </NavLink>
-            <p>{product?.title}</p>
+            <p>{product?.name}</p>
           </div>
-          <h2>{product?.title}</h2>
+          <h2>{product?.name}</h2>
           <div className="price">
             <span>${product?.price}</span>
             <p>Reviews</p>

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {selectAllProducts} from '../../redux/slices/products/productSlice';
+import {selectProductsResult} from '../../redux/slices/products/productSlice';
 import Product from './Product';
 
 const HomeProducts = () => {
-  const products = useSelector(selectAllProducts);
+  const productsResults = useSelector(selectProductsResult)
+  const products = productsResults?.data?.products;
+  const homeProdtcts = products?.slice(0, 8);
   return (
     <>
         <div className="head-feat">
@@ -13,7 +15,7 @@ const HomeProducts = () => {
           <button>Shop here</button>
         </div>
         <ul className="body-feat">
-          {products.slice(0, 8)?.map((item) => (
+          {homeProdtcts?.map((item) => (
             <li key={item.id}>
               <Product product={item} />
             </li>

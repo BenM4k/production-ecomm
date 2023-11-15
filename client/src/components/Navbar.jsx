@@ -34,6 +34,7 @@ const Navbar = () => {
       <ul>
         { user !== null ?  (
         <>
+          { user?.role === 'ADMIN' && <li><NavLink to='/admin'>admin</NavLink></li> }
           <li><NavLink to='/cart'>cart</NavLink></li>
           <li className='cta'><NavLink to={`/profile/:${user?.name}`}>{user?.name}</NavLink></li>
         </>
