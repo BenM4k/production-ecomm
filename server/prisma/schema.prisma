@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRoles {
+  ADMIN
+  USER
+}
+
+model user {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  first_name    String?
+  last_name     String?
+  password      String
+  role          UserRoles @default(USER)
+  refresh_token String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Payment       payment[]
+  Order         order[]
+  Cart          cart[]
+  Seller        seller[]
+  Review        review[]
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model payment {
+  id        String        @id @default(uuid())
+  order_id  String
+  user_id   String
+  amount    Float
+  date      DateTime
+  status    PaymentStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  user      user          @relation(fields: [user_id], references: [id])
+  order     order         @relation(fields: [order_id], references: [id])
+}
+
+enum ShippingStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+}
+
+model shipping {
+  id              String         @id @default(uuid())
+  order_id        String
+  address         String
+  tracking_number Int
+  status          ShippingStatus @default(PENDING)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  belongsTo       order          @relation(fields: [order_id], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model order {
+  id           String         @id @default(uuid())
+  user_id      String
+  order_date   DateTime
+  total_amount Float
+  order_status OrderStatus    @default(PENDING)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         user           @relation(fields: [user_id], references: [id])
+  Payment      payment[]
+  Shipping     shipping[]
+  OrderDetail  order_detail[]
+  Coupon       coupon[]
+}
+
+model order_detail {
+  id         String   @id @default(uuid())
+  order_d    String
+  product_id String
+  quantity   Int
+  subtotal   Float
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  order      order    @relation(fields: [order_d], references: [id])
+  product    product  @relation(fields: [product_id], references: [id])
+}
+
+model coupon {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  discount    Float
+  expiry_date DateTime
+  order_id    String
+  product_id  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  order       order    @relation(fields: [order_id], references: [id])
+  product     product  @relation(fields: [product_id], references: [id])
+}
+
+model cart {
+  id         String   @id @default(uuid())
+  user_id    String
+  product_id String
+  quantity   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       user     @relation(fields: [user_id], references: [id])
+  product    product  @relation(fields: [product_id], references: [id])
+}
+
+model product {
+  id          String         @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  image       String
+  quantity    Int
+  category_id String
+  seller_id   String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  category    category       @relation(fields: [category_id], references: [id])
+  seller      seller         @relation(fields: [seller_id], references: [id])
+  OrderDetail order_detail[]
+  Coupon      coupon[]
+  Cart        cart[]
+  Review      review[]
+}
+
+model seller {
+  id           String    @id @default(uuid())
+  user_id      String
+  company_name String
+  bio          String
+  contact_info String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  user         user      @relation(fields: [user_id], references: [id])
+  Product      product[]
+}
+
+model category {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   product[]
+}
+
+model review {
+  id         String   @id @default(uuid())
+  user_id    String
+  product_id String
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       user     @relation(fields: [user_id], references: [id])
+  product    product  @relation(fields: [product_id], references: [id])
+}

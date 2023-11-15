@@ -1,0 +1,82 @@
+@use '../reset/variables' as var;
+@use '../reset/mixins' as mx;
+
+.footer-container {
+    padding: 30px 50px;
+    color: var.$text-100;
+
+    .head {
+        @include mx.flex($align: flex-start, $justify: space-around);
+        padding: 24px 24px 64px;
+        border: 1px solid black;
+        gap: 16px;
+
+        .lists {
+            flex: 1;
+            @include mx.flex($align: flex-start);
+            gap: 48px;
+        }
+        ul {
+            width: 145px;
+            li{
+                padding-top: 16px;
+
+                a{
+                    color: var.$text-100;
+                    font-size: var.$fs-text;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                &:first-child {
+                    padding-top: none;
+                }
+            }
+        }
+
+        .subscribe {
+            flex: 1;
+            input {
+                border: 1px solid black;
+                padding: 12px;
+                width: 70%
+            }
+
+            p {
+                padding-top: 16px;
+            }
+            button {
+                margin-left: 12px;
+                padding: 12px;
+                border: 1px solid black;
+                background: none;
+            }
+        }
+
+        .logo {
+            width: 90px;
+
+            img {
+                height: 60px;
+            }
+        }
+    }
+
+    .foot {
+        @include mx.flex($justify: flex-start);
+        gap: 24px;
+        padding: 16px 0;
+
+        .socials {
+            @include mx.flex;
+            margin-left: auto;
+            gap: 16px;
+
+            svg {
+                color: var.$primary-200;
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+//colors
+
+$primary-100:#8B5FBF;
+$primary-200:#61398F;
+$primary-300:#FFFFFF;
+$accent-100:#D6C6E1;
+$accent-200:#9A73B5;
+$text-100:#4A4A4A;
+$text-200:#878787;
+$bg-100:#F5F3F7;
+$bg-200:#E9E4ED;
+$bg-300:#FFFFFF;
+
+//fonts
+$ff-primary: ('lato', sans-serif);
+$ff-heading: serif;
+
+$fw-text: 600;
+$fw-small: 500;
+$fw-title: 700;
+
+//font-scale
+$fs-h6: 1.125rem;
+$scale: 1.25;
+$fs-text: calc($fs-h6 / $scale);
+$fs-h5: calc($fs-h6 * $scale);
+$fs-h4: calc($fs-h5 * $scale);
+$fs-h3: calc($fs-h4 * $scale);
+$fs-h2: calc($fs-h3 * $scale);
+$fs-h1: calc($fs-h2 * $scale);
+
+//line height
+$lh-default: 1.5;
+$lh-title: 1.1;
+
+//classes
+.btn-primary {
+    color: $primary-300;
+    background-color: $primary-200;
+    padding: 10px 30px;
+    text-align: center;
+    font-size: $fs-h6;
+    font-weight: $fw-small;
+    border: none;
+}
+
+.btn-two {
+    width: 100%;
+    padding: .5rem;
+    color: $bg-300;
+    background-color: $primary-200;
+    border: none;
+}
+
+.btn-3 {
+    width: 100%;
+    padding: .5rem;
+    color: $text-100;
+    border: 1px solid $text-100;
+}
+.title {
+    font-size: $fs-h1;
+    color: $primary-200;
+}

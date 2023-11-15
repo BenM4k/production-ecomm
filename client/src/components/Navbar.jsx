@@ -1,0 +1,50 @@
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import logo from '../assets/logo_3.svg';
+import { selectCurrentUser } from "../redux/slices/users/userSlice";
+
+const Navbar = () => {
+  const user = useSelector(selectCurrentUser);
+  const links = [
+    {
+      name:'about',
+      path:'/about',
+    },
+    {
+      name:'store',
+      path:'/store',
+    },
+    {
+      name:'categories',
+      path:'/categories',
+    },
+  ];
+  return (
+    <nav>
+      <ul>
+        {links.map((link) => (
+          <li key={link.name}><NavLink to={link.path}>{link.name}</NavLink></li>
+        ))}
+      </ul>
+      <div className="logo">
+        <NavLink to='/'>
+          <img src={logo} alt="nav-logo" />
+        </NavLink>
+      </div>
+      <ul>
+        { user !== null ?  (
+        <>
+          <li><NavLink to='/cart'>cart</NavLink></li>
+          <li className='cta'><NavLink to={`/profile/:${user?.name}`}>{user?.name}</NavLink></li>
+        </>
+        ) : (
+        <>
+          <li><NavLink to='/login'>login</NavLink></li>
+          <li className="cta"><NavLink to='/register'>sign up</NavLink></li>
+        </>)}
+      </ul>
+    </nav>
+  )
+}
+
+export default Navbar
