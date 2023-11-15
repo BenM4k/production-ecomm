@@ -1,0 +1,57 @@
+@use '../reset/variables' as var;
+@use '../reset/mixins' as mx;
+
+.admin-wrapper {
+    @include mx.flex($justify: space-between);
+    height: 92vh;
+
+    .nav-list {
+        @include mx.flex($dir: column, $justify: flex-start);
+        padding: 1rem;
+        background-color: var.$bg-300;
+        flex-basis: 13%;
+        height: 100%;
+
+        button {
+            background: none;
+            border: none;
+            display: flex;
+            width: 100%;
+            flex-basis: 5%;
+            @include mx.flex($justify: flex-start);
+            padding: 1rem;
+            gap: 16px;
+
+            &:hover {
+                background-color: var.$bg-200;
+            }
+        }
+    }
+
+    .content {
+        @include mx.flex($dir: column, $justify: space-between);
+        flex-basis: 87%;
+        height: 100%;
+        padding: 1rem;
+        background-color: var.$bg-200;
+
+        .content-header {
+            @include mx.flex($justify: space-between);
+            width: 100%;
+            flex-basis: 15%;
+
+            li {
+                background-color: var.$bg-300;
+                flex-basis: 15%;
+                height: 100%;
+                @include mx.flex($dir: column);
+            }
+        }
+
+        .content-body {
+            width: 100%;
+            flex-basis: 82%;
+            background-color: var.$bg-300;
+        }
+    }
+}
