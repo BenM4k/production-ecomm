@@ -1,9 +1,10 @@
 import { FiDelete } from 'react-icons/fi';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectOrdersResult } from '../../redux/slices/order/orderSlice';
 
 const HandleOrders = () => {
-    const orders = []
+    const orders = useSelector(selectOrdersResult).data?.orders;
   return (
     <div>
         <ul>

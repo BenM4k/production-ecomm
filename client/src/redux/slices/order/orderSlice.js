@@ -10,10 +10,17 @@ export const orderApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getOrders: builder.query({
             query: () => ENDPOINT,
-            providesTags: (result) => result ? [
-                { type: 'order', id: 'LIST' },
-                ...result?.ids?.map((id) => ({ type: 'order', id})),
-            ] : { type: 'order', id: 'LIST'},
+            providesTags: (result) => {
+                if (result && Array.isArray(result.orders)) {
+                    const ordersIds = result.orders.map((order) => order.id);
+                    return [
+                        { type: 'order', id: 'LIST' },
+                        ...ordersIds.map((id) => ({ type: 'order', id })),
+                    ];
+                } else {
+                    return { type: 'order', id: 'LIST' };
+                }
+            }
         }),
         addOrder: builder.mutation({
             query: (order) => ({
@@ -46,13 +53,13 @@ export const {
     useGetOrdersQuery
 } = orderApiSlice;
 
-export const selectOrderResult = orderApiSlice.endpoints.getOrders.select()
+export const selectOrdersResult = orderApiSlice.endpoints.getOrders.select()
 
 const selectOrdersData = createSelector(
-    selectOrderResult,
+    selectOrdersResult,
     (orderResult) => orderResult.data,
 )
 
 export const {
-    selectAll: selectAllOrders,
+    selectAll: selectAllorders,
 } = ordersAdapter.getSelectors((store) => selectOrdersData(store) ?? initialState )

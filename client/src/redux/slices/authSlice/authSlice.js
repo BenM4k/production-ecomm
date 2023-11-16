@@ -10,6 +10,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['User'],
         }),
+        refresh: builder.query({
+            query: () => ({
+                url: '/refresh',
+            }),
+        }),
         register: builder.mutation({
             query: (credentials) => ({
                 url: 'register',
@@ -28,4 +33,4 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
 })
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useRefreshQuery } = authApiSlice;

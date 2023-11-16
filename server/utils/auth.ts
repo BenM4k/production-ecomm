@@ -11,7 +11,7 @@ export const createJWT = (user) => {
             role: user.role
         },
         process.env.JWT_SECRET,
-        {expiresIn: '5m'}
+        {expiresIn: '10s'}
     );
     return token;
 }

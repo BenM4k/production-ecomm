@@ -1,22 +1,23 @@
 import { useSelector } from 'react-redux';
 import { selectProductsResult } from '../../redux/slices/products/productSlice';
 import { selectCategoriesResult } from '../../redux/slices/category/category';
+import { selectOrdersResult } from '../../redux/slices/order/orderSlice';
 import { FaUser, FaClipboardCheck, FaImage } from 'react-icons/fa';
 import {TbCategory} from 'react-icons/tb';
 import {BsFillBagCheckFill} from 'react-icons/bs';
 
 const Records = () => {
-    const orders =[]
+    const orders =useSelector(selectOrdersResult).data?.orders;
     const banners = []
-    const categories = useSelector(selectCategoriesResult)?.data?.categories;
+    const categories = useSelector(selectCategoriesResult).data?.categories;
     const users = [];
-    const products = useSelector(selectProductsResult)?.data?.products;
+    const products = useSelector(selectProductsResult).data?.products;
 
   return (
     <ul className="content-header">
         <li>
             <FaUser />
-            <p>{users.length}</p>
+            <p>{users?.length}</p>
             <span>Users</span>
         </li>
         <li>

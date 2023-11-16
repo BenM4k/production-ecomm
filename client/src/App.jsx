@@ -4,6 +4,7 @@ import MainSpinner from './components/spinners/MainSpinner';
 import Layout from './components/Layout';
 import RequireAuth from "./components/RequireAuth";
 import { Route, Routes } from "react-router-dom";
+import PersistentLogin from "./components/PersistentLogin";
 
 const Admin = lazy(() => import('./routes/Admin/Admin'));
 const Cart = lazy(() => import('./routes/Cart/Cart'));
@@ -21,21 +22,22 @@ function App() {
     <>
       <Suspense fallback={<MainSpinner />}>
         <Routes>
-          <Route path="/" element={<Layout />} >
+          <Route element={<PersistentLogin />}>
+            <Route path="/" element={<Layout />} >
+              <Route path="/" element={<Home />} />
+              <Route path="/category/:category" element={<Category />}/>
+              <Route path="/login" element={<Login />} />
+              <Route path="/*" element={<NotFound />} />
+              <Route path="/products/:id" element={<Product />} />
+              <Route path="store" element={<Store />} />
+              <Route path="Unauthorized" element={<Unauthorized />} />
+              <Route path="/register" element={<SignUp />} />
 
-            <Route path="/" element={<Home />} />
-            <Route path="/category/:category" element={<Category />}/>
-            <Route path="/login" element={<Login />} />
-            <Route path="/*" element={<NotFound />} />
-            <Route path="/products/:id" element={<Product />} />
-            <Route path="store" element={<Store />} />
-            <Route path="Unauthorized" element={<Unauthorized />} />
-            <Route path="/register" element={<SignUp />} />
-
-            <Route element={<RequireAuth role={'USER'}/>}>
-              <Route path="/admin" element={<Admin />} />
-              <Route path="profile/:uname" element={<Profile />} />
-              <Route path="/cart" element={<Cart />} />
+              <Route element={<RequireAuth role={'USER'}/>}>
+                <Route path="/admin" element={<Admin />} />
+                <Route path="profile/:uname" element={<Profile />} />
+                <Route path="/cart" element={<Cart />} />
+              </Route>
             </Route>
           </Route>
         </Routes>

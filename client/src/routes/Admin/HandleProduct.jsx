@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectProductsResult } from '../../redux/slices/products/productSlice';
-import { selectCategoriesResult } from '../../redux/slices/category/category';
+import { FiDelete } from 'react-icons/fi';
+import { FaEdit} from 'react-icons/fa';
 import AddProduct from '../../components/adders/AddProduct';
 
 const HandleProducts = () => {
@@ -12,7 +13,13 @@ const HandleProducts = () => {
             <h2>Products List</h2>
             <ul>
               {products?.map((product) => (
-                <li key={product.id}>{product.name}</li>
+                <li key={product.id}>
+                  <p>{product.name}</p>
+                  <div className="buttons">
+                    <button className="btn-2"><FaEdit /></button>
+                    <button className="btn-2"><FiDelete /></button>
+                  </div>
+                </li>
               ))}
             </ul>
         </div>
