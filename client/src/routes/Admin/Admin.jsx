@@ -10,6 +10,7 @@ import HandleCategories from './HandleCategories';
 import HandleBanners from './HandleBanner';
 import HandleOrders from './HandleOrder';
 import Records from './Records';
+import HandleReviews from './HandleReviews';
 
 const Admin = () => {
     const myList = [
@@ -32,7 +33,11 @@ const Admin = () => {
         {
             name: 'Products',
             pic: <BsFillBagCheckFill />,
-        }
+        },
+        {
+            name: 'Reviews',
+            pic: <TbCategory />,
+        },
     ]
     const [activeTab, setActiveTab] = useState(() => 'users');
 
@@ -100,6 +105,11 @@ const Admin = () => {
                               <HandleOrders />
                           </div>
                       </div>
+                  )}
+                  {activeTab === 'reviews' && (
+                    <>
+                        <HandleReviews />
+                    </>
                   )}
                 </div>
             </div>

@@ -45,7 +45,7 @@ const Product = () => {
       </div>
 
       <div className="feedback">
-        <Feedback reviews={product?.Review}/>
+        <Feedback reviews={product?.Review} productId={id}/>
       </div>
 
       <div className="suggested">

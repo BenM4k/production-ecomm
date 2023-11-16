@@ -47,8 +47,8 @@ model payment {
   status    PaymentStatus @default(PENDING)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
-  user      user          @relation(fields: [user_id], references: [id])
-  order     order         @relation(fields: [order_id], references: [id])
+  user      user          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  order     order         @relation(fields: [order_id], references: [id], onDelete: Cascade)
 }
 
 enum ShippingStatus {
@@ -65,7 +65,7 @@ model shipping {
   status          ShippingStatus @default(PENDING)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-  belongsTo       order          @relation(fields: [order_id], references: [id])
+  belongsTo       order          @relation(fields: [order_id], references: [id], onDelete: Cascade)
 }
 
 enum OrderStatus {
@@ -84,7 +84,7 @@ model order {
   order_status OrderStatus    @default(PENDING)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  user         user           @relation(fields: [user_id], references: [id])
+  user         user           @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Payment      payment[]
   Shipping     shipping[]
   OrderDetail  order_detail[]
@@ -99,8 +99,8 @@ model order_detail {
   subtotal   Float
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  order      order    @relation(fields: [order_d], references: [id])
-  product    product  @relation(fields: [product_id], references: [id])
+  order      order    @relation(fields: [order_d], references: [id], onDelete: Cascade)
+  product    product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
 }
 
 model coupon {
@@ -112,8 +112,8 @@ model coupon {
   product_id  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  order       order    @relation(fields: [order_id], references: [id])
-  product     product  @relation(fields: [product_id], references: [id])
+  order       order    @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  product     product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
 }
 
 model cart {
@@ -123,8 +123,8 @@ model cart {
   quantity   Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  user       user     @relation(fields: [user_id], references: [id])
-  product    product  @relation(fields: [product_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  product    product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
 }
 
 model product {
@@ -138,8 +138,8 @@ model product {
   seller_id   String
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
-  category    category       @relation(fields: [category_id], references: [id])
-  seller      seller         @relation(fields: [seller_id], references: [id])
+  category    category       @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  seller      seller         @relation(fields: [seller_id], references: [id], onDelete: Cascade)
   OrderDetail order_detail[]
   Coupon      coupon[]
   Cart        cart[]
@@ -154,7 +154,7 @@ model seller {
   contact_info String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-  user         user      @relation(fields: [user_id], references: [id])
+  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Product      product[]
 }
 
@@ -174,6 +174,6 @@ model review {
   comment    String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  user       user     @relation(fields: [user_id], references: [id])
-  product    product  @relation(fields: [product_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  product    product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
 }
