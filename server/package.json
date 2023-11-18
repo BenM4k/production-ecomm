@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server.ts"
+    "dev": "nodemon server.ts",
+    "vercel-build": "echo hello"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
