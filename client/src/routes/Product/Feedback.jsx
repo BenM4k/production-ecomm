@@ -1,5 +1,50 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/slices/users/userSlice";
+import { useAddReviewMutation } from "../../redux/slices/review/reviewSlice";
 
-const Feedback = ({reviews}) => {
+const Feedback = ({reviews, productId}) => {
+  const user = useSelector(selectCurrentUser)
+  const [addReview] = useAddReviewMutation()
+  const [formData, setFormData] = useState({
+    user_id: user?.id,
+    product_id: `${productId}`,
+    comment: '',
+    rating: 0,
+  })
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { user_id, product_id, comment, rating } = formData
+    if (comment && rating) {
+      const postedReview = {
+        user_id,
+        product_id,
+        comment,
+        rating: Number(rating),
+      }
+      try {
+        addReview(postedReview).unwrap()
+        setFormData({
+          user_id: `${user?.id}`,
+          product_id: `${productId}`,
+          comment: '',
+          rating: 0,
+        })
+      }catch (err) {
+        console.log(err)
+      }
+    } else {
+      alert('Please fill all fields')
+    }
+  }
+
   return (
     <>
         <h2>Customers feedback</h2>
@@ -11,16 +56,18 @@ const Feedback = ({reviews}) => {
             </li>
           ))}
         </ul>
-        <textarea cols="50" rows="3" placeholder="Add you review"/>
-        <select name="" id="">
-          <option value={0}>Rate this product</option>
-          <option value={1}>⭐</option>
-          <option value={2}>⭐⭐</option>
-          <option value={3}>⭐⭐⭐</option>
-          <option value={4}>⭐⭐⭐⭐</option>
-          <option value={5}>⭐⭐⭐⭐⭐</option>
-        </select>
-        <button>Review</button>
+        <form action="" onSubmit={handleSubmit}>
+          <textarea cols="50" rows="3" name='comment' value={formData.comment} placeholder="Add you review" onChange={handleChange}/>
+          <select name="rating" id="rating" value={formData.rating} onChange={handleChange}>
+            <option value={0}>Rate this product</option>
+            <option value={1}>⭐</option>
+            <option value={2}>⭐⭐</option>
+            <option value={3}>⭐⭐⭐</option>
+            <option value={4}>⭐⭐⭐⭐</option>
+            <option value={5}>⭐⭐⭐⭐⭐</option>
+          </select>
+          <button>Review</button>
+        </form>
     </>
   )
 }

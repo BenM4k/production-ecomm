@@ -21,7 +21,7 @@ const Footer = () => {
             <div className='logo'>
                 <img src={logo} alt="" />
             </div>
-            <div class="lists">
+            <div className="lists">
                 <ul className="about">
                     <h3>About Us</h3>
                     {about.map((item) => (

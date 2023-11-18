@@ -4,6 +4,7 @@
 .footer-container {
     padding: 30px 50px;
     color: var.$text-100;
+    background-color: var.$bg-300;
 
     .head {
         @include mx.flex($align: flex-start, $justify: space-around);

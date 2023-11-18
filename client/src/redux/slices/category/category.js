@@ -10,10 +10,17 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => ENDPOINT,
-            providesTags: (result) => result ? [
-                { type: 'category', id: 'LIST' },
-                ...result?.ids?.map((id) => ({ type: 'category', id})),
-            ] : { type: 'category', id: 'LIST'},
+            providesTags: (result) => {
+                if (result && Array.isArray(result.categories)) {
+                    const categoriesIds = result.categories.map((category) => category.id);
+                    return [
+                        { type: 'category', id: 'LIST' },
+                        ...categoriesIds.map((id) => ({ type: 'category', id })),
+                    ];
+                } else {
+                    return { type: 'category', id: 'LIST' };
+                }
+            }
         }),
         addCategory: builder.mutation({
             query: (category) => ({
@@ -28,7 +35,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
               ],
         }),
         deleteCategory: builder.mutation({
-            query: ({ id }) => ({
+            query: (id) => ({
                 url: `${ENDPOINT}/${id}`,
                 method: 'DELETE',
                 body: { id },

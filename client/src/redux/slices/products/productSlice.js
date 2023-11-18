@@ -10,10 +10,17 @@ export const productApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getProducts: builder.query({
             query: () => ENDPOINT,
-            providesTags: (result) => result ? [
-                { type: 'product', id: 'LIST' },
-                ...result?.ids?.map((id) => ({ type: 'product', id})),
-            ] : { type: 'product', id: 'LIST'},
+            providesTags: (result) => {
+                if (result && Array.isArray(result.products)) {
+                    const productIds = result.products.map((product) => product.id);
+                    return [
+                        { type: 'product', id: 'LIST' },
+                        ...productIds.map((id) => ({ type: 'product', id })),
+                    ];
+                } else {
+                    return { type: 'product', id: 'LIST' };
+                }
+            },
         }),
         addProduct: builder.mutation({
             query: (product) => ({
@@ -28,7 +35,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
               ],
         }),
         deleteProduct: builder.mutation({
-            query: ({ id }) => ({
+            query: (id) => ({
                 url: `${ENDPOINT}/${id}`,
                 method: 'DELETE',
                 body: { id },
@@ -50,10 +57,9 @@ export const selectProductsResult = productApiSlice.endpoints.getProducts.select
 
 const selectProductsData = createSelector(
     selectProductsResult,
-    (productResult) => productResult.data,
-)
+    (productResult) => productResult.data.products,
+);
 
 export const {
     selectAll: selectAllProducts,
-} = productsAdapter.getSelectors((store) => selectProductsData(store) ?? initialState )
-
+} = productsAdapter.getSelectors((store) => selectProductsData(store) ?? initialState);

@@ -14,6 +14,9 @@ const handleRefreshtoken = async (req, res) => {
     const user = await prisma.user.findFirst({
         where: {
             refresh_token: refreshToken
+        },
+        include: {
+            Seller: true,
         }
     })
 
@@ -30,7 +33,8 @@ const handleRefreshtoken = async (req, res) => {
             email: user.email,
             first_name: user.first_name,
             last_name: user.last_name,
-            role: user.role
+            role: user.role,
+            Seller: user.Seller,
         }
         res.json({
             user: responseUser,
