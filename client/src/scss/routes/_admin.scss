@@ -3,7 +3,7 @@
 
 .admin-wrapper {
     @include mx.flex($justify: space-between);
-    height: 92vh;
+    min-height: 92vh;
 
     .nav-list {
         @include mx.flex($dir: column, $justify: flex-start);
