@@ -34,6 +34,18 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
                 { type: 'category', id: 'LIST' },
               ],
         }),
+        updateCategory: builder.mutation({
+            query: (category) => ({
+                url: `${ENDPOINT}/${category.id}`,
+                method: 'PUT',
+                body: {
+                  ...category,
+                },
+              }),
+              invalidatesTags: [
+                { type: 'category', id: 'LIST' },
+              ],
+        }),
         deleteCategory: builder.mutation({
             query: (id) => ({
                 url: `${ENDPOINT}/${id}`,
@@ -50,7 +62,8 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
 export const {
     useAddCategoryMutation,
     useDeleteCategoryMutation,
-    useGetCategoriesQuery
+    useGetCategoriesQuery,
+    useUpdateCategoryMutation
 } = categoryApiSlice;
 
 export const selectCategoriesResult = categoryApiSlice.endpoints.getCategories.select()
