@@ -2,7 +2,8 @@ const allowedOrigins = [
     'http://127.0.0.1:5173',
     'http://localhost:5173',
     'http://localhost:3001',
-    'http://102.22.141.170'
+    'http://102.22.141.170',
+    'https://production-ecomm.vercel.app/'
 ];
 
 const corsOptions = {
