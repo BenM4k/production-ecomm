@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../../redux/slices/authSlice/authSlice';
 import { setCredentials } from '../../redux/slices/users/userSlice';
+import { selectCurrentMessage } from '../../redux/slices/users/userSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const Login = () => {
   const location = useLocation()
   const from = location.state?.from?.pathname || '/';
 
+  const loginMessage = useSelector(selectCurrentMessage)
   const [login, { isLoading, error }] = useLoginMutation();
   const dispatch = useDispatch()
 
@@ -41,6 +43,8 @@ const Login = () => {
    }
   return (
     <>
+      <h1>Login</h1>
+      <h3>{loginMessage ? loginMessage : ''}</h3>
       <form onSubmit={handleSubmit}>
         <h3>{err}</h3>
         <label>email</label>
