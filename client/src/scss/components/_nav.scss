@@ -17,11 +17,14 @@ nav {
             @include mx.flex;
             transition: all .1s;
             a{
+                @include mx.flex;
                 text-decoration: none;
                 color: var.$text-100;
                 font-weight: var.$fw-text;
                 font-size: var.$fs-text;
                 text-transform: capitalize;
+                height: 100%;
+                transition: all .3s;
             }
 
             &:hover{
@@ -34,6 +37,7 @@ nav {
                 background-color: var.$primary-200;
                 color: var.$primary-300;
                 padding: 5px 10px;
+                height: 40%;
             }
             &:hover {
                 border: none;
