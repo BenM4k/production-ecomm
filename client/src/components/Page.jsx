@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import phone from '../assets/phone_1.png';
 
 const Page = ({data = []}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,7 +11,7 @@ const Page = ({data = []}) => {
   return (
     <>
       <figure>
-        <img src={item?.img} alt='Banner image' />
+        <img src={phone} alt='Banner image' />
         <h1 className="title">{item?.title}</h1>
         <figcaption>{item?.desc}</figcaption>
         <div className="">
