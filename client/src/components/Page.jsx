@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import phone from '../assets/phone_1.png';
 
 const Page = ({data = []}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -7,12 +8,14 @@ const Page = ({data = []}) => {
   const handleClick = (index) => {
     setCurrentIndex(index);
   }
+  const desc = "Dictumst animi occaecati exercitationem pharetra ac aut sagittis vero aliquet, tellus nisi, curae luctus, ipsa, veniam, aliquip ad, soluta! Harum pellentesque earum scelerisque soluta totam aperiam optio";
+
   return (
     <>
       <figure>
-        <img src={item?.img} alt='Banner image' />
+        <img src={phone} alt='Banner image' />
         <h1 className="title">{item?.title}</h1>
-        <figcaption>{item?.desc}</figcaption>
+        <figcaption>{desc}</figcaption>
         <div className="">
             <div className="left" onClick={() => handleClick(currentIndex === 0 ? data.length - 1 : currentIndex - 1)}>
                 <HiChevronLeft />

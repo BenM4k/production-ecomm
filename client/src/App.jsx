@@ -29,13 +29,13 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/*" element={<NotFound />} />
               <Route path="/products/:id" element={<Product />} />
-              <Route path="store" element={<Store />} />
-              <Route path="Unauthorized" element={<Unauthorized />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/Unauthorized" element={<Unauthorized />} />
               <Route path="/register" element={<SignUp />} />
 
               <Route element={<RequireAuth role={'USER'}/>}>
                 <Route path="/admin" element={<Admin />} />
-                <Route path="profile/:uname" element={<Profile />} />
+                <Route path="/profile/:uname" element={<Profile />} />
                 <Route path="/cart" element={<Cart />} />
               </Route>
             </Route>
