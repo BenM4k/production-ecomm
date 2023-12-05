@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from '../assets/logo_3.svg';
-import { selectCurrentUser } from "../redux/slices/users/userSlice";
+import { selectCurrentUser, selectCart } from "../redux/slices/users/userSlice";
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
+  const cart = useSelector(selectCart);
   const links = [
     {
       name:'about',
@@ -34,9 +35,21 @@ const Navbar = () => {
       <ul>
         { user !== null ?  (
         <>
-          { user?.role === 'ADMIN' && <li><NavLink to='/admin'>admin</NavLink></li> }
-          <li><NavLink to='/cart'>cart</NavLink></li>
-          <li className='cta'><NavLink to={`/profile/:${user?.first_name}`}>{user?.first_name}</NavLink></li>
+          { user?.role === 'ADMIN' &&
+          <li>
+            <NavLink to='/admin'>admin</NavLink>
+          </li>
+          }
+          <li>
+            <NavLink to='/cart'>
+              cart <span className={cart.length ? 'cart-total' : ''}>{cart.length ? cart.length : ''}</span>
+            </NavLink>
+          </li>
+          <li className='cta'>
+            <NavLink to={`/profile/:${user?.first_name}`}>
+              {user?.first_name}
+            </NavLink>
+          </li>
         </>
         ) : (
         <>

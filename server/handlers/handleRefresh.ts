@@ -17,11 +17,13 @@ const handleRefreshtoken = async (req, res) => {
         },
         include: {
             Seller: true,
+            Cart: true,
+            Order: true,
         }
     })
 
     if (!user) {
-        res.status(401).json({message: 'Unauthorized'});
+        res.status(401).json({message: 'Invalid user Token'});
         return
     }
 
@@ -35,6 +37,8 @@ const handleRefreshtoken = async (req, res) => {
             last_name: user.last_name,
             role: user.role,
             Seller: user.Seller,
+            Cart: user.Cart,
+            Order: user.Order,
         }
         res.json({
             user: responseUser,

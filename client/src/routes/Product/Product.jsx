@@ -1,12 +1,17 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { selectProductsResult } from '../../redux/slices/products/productSlice'
 import { NavLink, useParams } from "react-router-dom";
 import Suggested from "./Suggested";
 import Feedback from "./Feedback";
 import ProductImage from "./ProductImage";
+import { addToCart } from "../../redux/slices/users/userSlice";
 
 const Product = () => {
   const { id } = useParams();
+  const dispatch = useDispatch()
+  const handleAddToCart = (prod) => {
+    dispatch(addToCart(prod))
+  }
   const products = useSelector(selectProductsResult)?.data?.products;
   const product = products.find((p) => p.id === id);
   const suggested = products.filter((p) => p.category === product.category && p.id !== product.id)
@@ -34,7 +39,7 @@ const Product = () => {
           </div>
 
           <button className="btn-two">Buy Now</button>
-          <button className="btn-3">Add To cart</button>
+          <button className="btn-3" onClick={() => handleAddToCart(product)}>Add To cart</button>
 
           <div className="shipping"></div>
           <div className="returns"></div>

@@ -20,10 +20,10 @@ const SignUp = () => {
     formData[name] = value
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      register(formData).unwrap()
+      await register(formData).unwrap()
       dispatch(setMessage('Registration Successful, Please Login'))
       setFormData({})
       navigate('/login')

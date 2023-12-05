@@ -10,6 +10,7 @@ export const handleLogin = async (req, res) => {
         include: {
             Seller: true,
             Order: true,
+            Cart: true,
         }
     });
 
@@ -45,6 +46,7 @@ export const handleLogin = async (req, res) => {
         role: user.role,
         Seller: user.Seller,
         Order: user.Order,
+        Cart: user.Cart,
     }
 
     //create a secure cookie with refresh token
