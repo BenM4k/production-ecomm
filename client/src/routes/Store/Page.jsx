@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { addToCart } from '../../redux/slices/cart/cartSlice';
+import { addToCart } from '../../redux/slices/users/userSlice';
 import { useDispatch, useSelector } from "react-redux";
 import phone from '../../assets/phone_1.png';
 // import './Paginated.sc ss';
@@ -12,8 +12,8 @@ const Pagineted = ({ items, itemsPerPage }) => {
     const [currentPage, setCurrentPage] = useState(() => 1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const searchedItems = query ? items.filter((item) => item.title.toLowerCase().includes(query)) : items;
-    const currentItems = searchedItems.slice(startIndex, endIndex);
+    const searchedItems = query ? items?.filter((item) => item.title.toLowerCase().includes(query)) : items;
+    const currentItems = searchedItems?.slice(startIndex, endIndex);
 
     const goToPage = (pageNumber) => {
         setCurrentPage(pageNumber);
