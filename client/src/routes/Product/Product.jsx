@@ -15,7 +15,7 @@ const Product = () => {
   const products = useSelector(selectProductsResult)?.data?.products;
   const product = products.find((p) => p.id === id);
   const suggested = products.filter(
-    (p) => p.category === product.category && p.id !== product.id
+    (p) => p.category_id === product.category_id && p.id !== product.id
   );
 
   return (

@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
-import {
-  useDeleteCategoryMutation,
-  useUpdateCategoryMutation,
-} from "../../redux/slices/category/category";
+import { useDeleteCategoryMutation } from "../../redux/slices/category/category";
 import { FiDelete } from "react-icons/fi";
 import { FaEdit } from "react-icons/fa";
 import AddCategory from "../../components/adders/AddCategory";

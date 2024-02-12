@@ -21,10 +21,10 @@ const baseQueryWithAuth = async (args, api, extraOptions) => {
     console.log(refreshResult);
     if (refreshResult?.data) {
       const user = api.getState().auth.user;
-      api.dispatch(setCredentials({ ...refreshResult?.data, user }));
+      api.dispatch(getState().setCredentials({ ...refreshResult?.data, user }));
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(logOut());
+      api.dispatch(getState().logOut());
     }
   }
 

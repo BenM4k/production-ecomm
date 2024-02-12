@@ -25,7 +25,7 @@ const PersistentLogin = () => {
     if (!token && !isLoading) {
       verifyRefreshToken();
     }
-  }, [data, token, isLoading]);
+  }, [data, token, isLoading, dispatch]);
 
   return <div>{isLoading ? <MainSpinner /> : <Outlet />}</div>;
 };

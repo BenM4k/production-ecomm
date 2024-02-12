@@ -62,7 +62,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
         {Array.from({ length: totalPages }).map((_, index) => (
           <button
             key={index}
-            onClick={(e) => {
+            onClick={() => {
               goToPage(index + 1);
             }}
             className={index + 1 === currentPage ? "active" : ""}

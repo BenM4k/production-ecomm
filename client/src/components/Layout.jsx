@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from  './Navbar';
-import Footer from './Footer';
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Layout = () => {
   const [error, setError] = useState(false);
@@ -10,10 +10,10 @@ const Layout = () => {
     const handleError = (err, errInfo) => {
       console.log(err, errInfo);
       setError(true);
-    }
+    };
 
-    window.addEventListener('error', handleError);
-    return () => window.removeEventListener('error', handleError);
+    window.addEventListener("error", handleError);
+    return () => window.removeEventListener("error", handleError);
   }, []);
 
   return (
@@ -23,7 +23,7 @@ const Layout = () => {
       <Outlet />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

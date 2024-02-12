@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { selectCurrentUser } from "../redux/slices/users/userSlice";
 import { useSelector } from "react-redux";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const LoggedOut = () => {
   const user = useSelector(selectCurrentUser);
@@ -11,7 +11,7 @@ const LoggedOut = () => {
     if (user) {
       navigate("/");
     }
-  }, []);
+  });
 
   return <>{!user && <Outlet />}</>;
 };

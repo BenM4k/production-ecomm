@@ -21,7 +21,7 @@ const Feedback = ({ reviews, product }) => {
 
   useEffect(() => {
     setFormData({ ...formData, product_id: product.id });
-  }, [product]);
+  }, [product, formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
