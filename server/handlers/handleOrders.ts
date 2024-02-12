@@ -32,6 +32,7 @@ export const getOrders = async (req, res) => {
   const orders = await prisma.order.findMany({
     include: {
       OrderDetail: true,
+      Shipping: true,
     },
   });
 

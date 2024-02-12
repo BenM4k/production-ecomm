@@ -4,6 +4,7 @@ import apiSlice from "./api/apiSlice";
 import cartSlice from "./slices/cart/cartSlice";
 import searchSlice from "./slices/search/searchSlice";
 import authSlice from "./slices/users/userSlice";
+import notificationSlice from "./slices/notifications/notif";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     cart: cartSlice,
     search: searchSlice,
     auth: authSlice,
+    notification: notificationSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

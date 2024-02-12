@@ -6,6 +6,8 @@ import { useLoginMutation } from "../../redux/slices/authSlice/authSlice";
 import { setCredentials } from "../../redux/slices/users/userSlice";
 import { selectCurrentMessage } from "../../redux/slices/users/userSlice";
 
+import { setError } from "../../redux/slices/notifications/notif";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
@@ -31,13 +33,13 @@ const Login = () => {
     } catch (err) {
       // Handle login error
       if (!err.data) {
-        setErr("No server response");
+        dispatch(setError("No server response"));
       } else if (err.data.message) {
-        setErr(err.data.message);
+        dispatch(setError(err.data.message));
       } else if (err.data.type) {
-        setErr("Add valid email and/or password");
+        dispatch(setError("Add valid email and/or password"));
       } else {
-        setErr("Something went wrong");
+        dispatch(setError("Something went wrong"));
       }
     }
   };
