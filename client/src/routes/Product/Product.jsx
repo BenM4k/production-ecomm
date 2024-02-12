@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
-import { selectProductsResult } from '../../redux/slices/products/productSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { NavLink, useParams } from "react-router-dom";
 import Suggested from "./Suggested";
 import Feedback from "./Feedback";
@@ -8,21 +8,23 @@ import { addToCart } from "../../redux/slices/users/userSlice";
 
 const Product = () => {
   const { id } = useParams();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleAddToCart = (prod) => {
-    dispatch(addToCart(prod))
-  }
+    dispatch(addToCart(prod));
+  };
   const products = useSelector(selectProductsResult)?.data?.products;
   const product = products.find((p) => p.id === id);
-  const suggested = products.filter((p) => p.category === product.category && p.id !== product.id)
+  const suggested = products.filter(
+    (p) => p.category === product.category && p.id !== product.id
+  );
 
   return (
     <div className="product-container">
       <div className="prod-head">
         <div className="left">
           <div className="nav">
-            <NavLink to='/store'>Browse All </NavLink>
-            <NavLink to='/categories'> Category </NavLink>
+            <NavLink to="/store">Browse All </NavLink>
+            <NavLink to="/categories"> Category </NavLink>
             <p>{product?.name}</p>
           </div>
           <h2>{product?.name}</h2>
@@ -39,25 +41,27 @@ const Product = () => {
           </div>
 
           <button className="btn-two">Buy Now</button>
-          <button className="btn-3" onClick={() => handleAddToCart(product)}>Add To cart</button>
+          <button className="btn-3" onClick={() => handleAddToCart(product)}>
+            Add To cart
+          </button>
 
           <div className="shipping"></div>
           <div className="returns"></div>
         </div>
         <div className="right">
-          <ProductImage product={product}/>
+          <ProductImage product={product} />
         </div>
       </div>
 
       <div className="feedback">
-        <Feedback reviews={product?.Review} productId={id}/>
+        <Feedback reviews={product?.Review} product={product} />
       </div>
 
       <div className="suggested">
-        <Suggested suggested={suggested}/>
+        <Suggested suggested={suggested} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;

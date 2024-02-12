@@ -7,7 +7,7 @@ import { setCredentials } from "../redux/slices/users/userSlice";
 import MainSpinner from "./spinners/MainSpinner";
 
 const PersistentLogin = () => {
-  const { data, isLoading, error } = useRefreshQuery();
+  const { data, isLoading } = useRefreshQuery();
   const dispatch = useDispatch();
   const token = useSelector(selectCurrentToken);
 
@@ -15,23 +15,19 @@ const PersistentLogin = () => {
     const verifyRefreshToken = async () => {
       try {
         if (data) {
-          await dispatch(setCredentials({ token: data.token, user: data.user }));
+          dispatch(setCredentials({ token: data.token, user: data.user }));
         }
       } catch (e) {
         console.error(e);
       }
     };
 
-    if (!token && !isLoading && !error) {
+    if (!token && !isLoading) {
       verifyRefreshToken();
     }
-  }, [data, token, isLoading, error]);
+  }, [data, token, isLoading]);
 
-  return (
-    <div>
-      {isLoading ? <MainSpinner /> : <Outlet />}
-    </div>
-  );
+  return <div>{isLoading ? <MainSpinner /> : <Outlet />}</div>;
 };
 
 export default PersistentLogin;
