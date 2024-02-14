@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAddCategoryMutation } from "../../redux/slices/category/category";
+import PrimaryButton from "../buttons/PrimaryButton";
+import FirstInput from "../inputs/FirstInput";
 
 const AddCategory = () => {
   const [addCategory] = useAddCategoryMutation();
@@ -32,16 +34,16 @@ const AddCategory = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="">
-        Name
-        <input
-          type="text"
-          name="name"
+        Category name
+        <FirstInput
+          id={name}
+          type={"text"}
+          name={"name"}
           value={formData.name}
-          id="name"
           onChange={handleFormChange}
         />
       </label>
-      <button className="btn-2">Add Category</button>
+      <PrimaryButton>Add Category</PrimaryButton>
     </form>
   );
 };

@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import { useAddProductMutation } from "../../redux/slices/products/productSlice";
 import { selectCurrentUser } from "../../redux/slices/users/userSlice";
+import FirstInput from "../inputs/FirstInput";
+import FirstTextArea from "../inputs/FirstTextArea";
 
 const AddProduct = () => {
   const [addProduct] = useAddProductMutation();
@@ -17,12 +19,16 @@ const AddProduct = () => {
     category_id: "",
   });
 
-  const handleFormChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleFormChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }, []);
+
+  const memoizedFormData = useMemo(() => formData, [formData]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
@@ -62,42 +68,41 @@ const AddProduct = () => {
   const categories = useSelector(selectCategoriesResult)?.data?.categories;
   return (
     <>
+      <h2>Upload a Product</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
           Name
-          <input
-            name="name"
-            type="text"
-            value={formData.name}
+          <FirstInput
+            name={"name"}
+            type={"text"}
+            value={memoizedFormData.name}
             onChange={handleFormChange}
-            required
           />
         </label>
-        <label htmlFor="">
+        <label htmlFor="price">
           Price
-          <input
-            name="price"
-            type="number"
-            value={formData.price}
+          <FirstInput
+            name={"price"}
+            type={"number"}
+            value={memoizedFormData.price}
             onChange={handleFormChange}
-            required
           />
         </label>
-        <label htmlFor=""></label>
-        Image
-        <input
-          name="image"
-          type="text"
-          value={formData.image}
-          onChange={handleFormChange}
-          required
-        />
-        <label htmlFor="">
+        <label htmlFor="image">
+          Image
+          <FirstInput
+            name={"image"}
+            type={"text"}
+            value={memoizedFormData.image}
+            onChange={handleFormChange}
+          />
+        </label>
+        <label htmlFor="description">
           Description
-          <textarea
+          <FirstTextArea
             name="description"
             type="text"
-            value={formData.description}
+            value={memoizedFormData.description}
             onChange={handleFormChange}
             required
           />
@@ -106,7 +111,7 @@ const AddProduct = () => {
           name="category_id"
           id=""
           onChange={handleFormChange}
-          value={formData.category_id}
+          value={memoizedFormData.category_id}
         >
           <option value="default">Select a category</option>
           {categories?.map((category) => (

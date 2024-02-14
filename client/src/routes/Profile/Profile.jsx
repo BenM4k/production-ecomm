@@ -4,6 +4,7 @@ import { selectCurrentUser } from "../../redux/slices/users/userSlice";
 import { useLogoutQuery } from "../../redux/slices/authSlice/authSlice";
 import { logOut, setMessage } from "../../redux/slices/users/userSlice";
 import { selectOrdersResult } from "../../redux/slices/order/orderSlice";
+import { setNotice, setError } from "../../redux/slices/notifications/notif";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -17,9 +18,10 @@ const Profile = () => {
     try {
       await refetch();
       dispatch(logOut());
-      dispatch(setMessage("Logged out"));
       navigate("/login");
+      dispatch(setNotice("Logged out"));
     } catch (e) {
+      dispatch(setError(e.message));
       console.log(e);
     }
   };

@@ -1,31 +1,42 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { addToCart } from "../../redux/slices/users/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import phone from "../../assets/phone_1.png";
-// import './Paginated.sc ss';
 
-const Pagineted = ({ items, itemsPerPage }) => {
+const Pagineted = ({
+  items,
+  itemsPerPage,
+  total,
+  page,
+  setCurrentPage,
+  isError,
+  isLoading,
+}) => {
   const dispatch = useDispatch();
-  const { query } = useSelector((store) => store.search);
-  const totalPages = Math.ceil(items?.length / itemsPerPage);
-  const [currentPage, setCurrentPage] = useState(() => 1);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const searchedItems = query
-    ? items?.filter((item) => item.title.toLowerCase().includes(query))
-    : items;
-  const currentItems = searchedItems?.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(total / itemsPerPage);
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  if (isLoading)
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  if (isError)
+    return (
+      <div>
+        <h1>Error fetching</h1>
+      </div>
+    );
+
   return (
     <div className="main-container">
       <ul className="product-list">
-        {currentItems?.length ? (
-          currentItems?.map((item) => (
+        {items ? (
+          items?.map((item) => (
             <li key={item.id} className="product">
               <NavLink
                 to={`/products/${item.id}`}
@@ -65,7 +76,7 @@ const Pagineted = ({ items, itemsPerPage }) => {
             onClick={() => {
               goToPage(index + 1);
             }}
-            className={index + 1 === currentPage ? "active" : ""}
+            className={index + 1 === page ? "active" : ""}
           >
             {index + 1}
           </button>

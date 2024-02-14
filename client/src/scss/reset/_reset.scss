@@ -59,7 +59,7 @@ svg {
 
 button {
   cursor: pointer;
-  transition: all 0.3 ease-in;
+  transition: scale ease-in;
 
   &:hover {
     scale: 1.02;
@@ -73,6 +73,9 @@ select {
   font: inherit;
 }
 
+.root {
+  position: relative;
+}
 .notices,
 .infos,
 .errors,
@@ -80,29 +83,116 @@ select {
   width: 100%;
   @include mx.flex;
   height: 50px;
+  width: 700px;
+  position: absolute;
+  top: 11%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   p {
     text-align: center;
     font-weight: bold;
   }
 }
 .notices {
-  background-color: rgba(255, 176, 46, 0.2);
-  color: rgba(255, 176, 46, 1);
+  background-color: rgba(255, 176, 46, 0.9);
+  color: rgb(255, 230, 189);
 }
 
 .errors {
-  background-color: rgba(249, 47, 96, 0.2);
-  color: rgba(249, 47, 96, 1);
+  background-color: rgba(249, 47, 96, 0.9);
+  color: rgb(255, 197, 211);
 }
 
 .success {
-  background-color: rgba(0, 210, 106, 0.2);
-  color: rgba(0, 210, 106, 1);
+  background-color: rgba(0, 210, 106, 0.9);
+  color: rgb(189, 255, 222);
 }
 
 .infos {
-  background-color: rgba(56, 120, 194, 0.2);
-  color: rgba(56, 120, 194, 1);
+  background-color: rgba(56, 120, 194, 0.9);
+  color: rgb(184, 217, 255);
+}
+
+//buttons
+.close-btn {
+  border: none;
+  background: none;
+  width: fit-content;
+  height: fit-content;
+
+  svg {
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: var.$primary-200;
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
+}
+
+.primary-btn {
+  width: fit-content;
+  color: #fff;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.3rem;
+  font-size: var.$fs-text;
+  border: none;
+  background-color: var.$primary-200;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    color: #fff;
+  }
+}
+
+.secondary-btn {
+  width: fit-content;
+  color: var.$primary-200;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.3rem;
+  font-size: var.$fs-text;
+  border: none;
+  background-color: var.$bg-200;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    color: var.$primary-100;
+  }
+}
+//inputs
+.first-input {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  background-color: var.$bg-200;
+  font-size: var.$fs-text;
+  margin: 8px 0;
+  color: var.$text-100;
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: 1px 0px 6px 0px #61398fa6;
+  }
+}
+
+.first-textarea {
+  width: fit-content;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  background-color: var.$bg-200;
+  font-size: var.$fs-text;
+  margin: 8px 0;
+  color: var.$text-100;
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: 1px 0px 6px 0px #61398fa6;
+  }
 }
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {

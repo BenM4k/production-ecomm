@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAddOrderMutation } from "../../redux/slices/order/orderSlice";
 import { clearCart } from "../../redux/slices/users/userSlice";
+import { setSuccess, setError } from "../../redux/slices/notifications/notif";
+import { throttle } from "../../lib/throttle";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -51,7 +53,9 @@ const Order = () => {
         dispatch(clearCart());
         setFormData(shippingDetail);
         navigate("/");
+        dispatch(setSuccess("Order created successfully"));
       } catch (error) {
+        setError(error.message);
         console.log(error);
       }
     }

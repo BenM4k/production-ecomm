@@ -1,0 +1,75 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.admin-orders {
+  padding: 1rem;
+
+  .orders {
+    height: 600px;
+
+    ul {
+      @include mx.flex($dir: column);
+      gap: 8px;
+      margin-top: 2rem;
+      li {
+        @include mx.flex($justify: flex-start);
+        font-size: var.$fs-text;
+        gap: 16px;
+        width: 100%;
+
+        .order-id {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 110px;
+
+          a {
+            color: var.$text-100;
+            text-decoration: underline;
+          }
+        }
+
+        .order-address {
+          flex-basis: 16%;
+        }
+
+        .order-track {
+          flex-basis: 32%;
+        }
+
+        .order-status {
+          flex-basis: 10%;
+
+          &.pending,
+          &.cancelled {
+            p {
+              color: red;
+            }
+          }
+
+          &.paid,
+          &.shipped,
+          &.delivered {
+            p {
+              color: green;
+            }
+          }
+        }
+
+        .order-total {
+          flex-basis: 10%;
+
+          p {
+            color: green;
+            font-weight: bold;
+          }
+        }
+
+        .buttons {
+          @include mx.flex();
+          gap: 8px;
+        }
+      }
+    }
+  }
+}

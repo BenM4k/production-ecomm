@@ -5,6 +5,7 @@ import Suggested from "./Suggested";
 import Feedback from "./Feedback";
 import ProductImage from "./ProductImage";
 import { addToCart } from "../../redux/slices/users/userSlice";
+import { useEffect } from "react";
 
 const Product = () => {
   const { id } = useParams();
@@ -17,6 +18,10 @@ const Product = () => {
   const suggested = products.filter(
     (p) => p.category_id === product.category_id && p.id !== product.id
   );
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [id]);
 
   return (
     <div className="product-container">

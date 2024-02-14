@@ -7,11 +7,11 @@ import { TbCategory } from "react-icons/tb";
 import { BsFillBagCheckFill } from "react-icons/bs";
 
 const Records = () => {
-  const orders = useSelector(selectOrdersResult).data?.orders;
+  const totalOrders = useSelector(selectOrdersResult).data?.total;
   const banners = [];
-  const categories = useSelector(selectCategoriesResult).data?.categories;
+  const totalCategories = useSelector(selectCategoriesResult).data?.total;
   const users = [];
-  const products = useSelector(selectProductsResult).data?.products;
+  const totalProducts = useSelector(selectProductsResult).data?.total;
 
   return (
     <ul className="content-header">
@@ -22,12 +22,12 @@ const Records = () => {
       </li>
       <li>
         <TbCategory />
-        <p>{categories?.length}</p>
+        <p>{totalCategories}</p>
         <span>Categories</span>
       </li>
       <li>
         <FaClipboardCheck />
-        <p>{orders?.length}</p>
+        <p>{totalOrders}</p>
         <span>Orders</span>
       </li>
       <li>
@@ -37,7 +37,7 @@ const Records = () => {
       </li>
       <li>
         <BsFillBagCheckFill />
-        <p>{products?.length}</p>
+        <p>{totalProducts}</p>
         <span>Products</span>
       </li>
     </ul>

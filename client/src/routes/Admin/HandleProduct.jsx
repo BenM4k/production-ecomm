@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { useDeleteProductMutation } from "../../redux/slices/products/productSlice";
-import { FiDelete } from "react-icons/fi";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AddProduct from "../../components/adders/AddProduct";
 import { useState } from "react";
 import UpdateProduct from "../../components/modals/UpdateProduct";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../components/buttons/SecondaryButton";
 
 const HandleProducts = () => {
   const [productToUpdate, setProductToUpdate] = useState(null);
@@ -20,27 +22,26 @@ const HandleProducts = () => {
   };
 
   return (
-    <>
-      <div>
+    <div className="admin-prods">
+      <div className="products-body">
         <div className="dash-head">
           <h2>Products List</h2>
           <ul>
             {products?.map((product) => (
               <li key={product.id}>
-                <p>{product.name}</p>
+                <div className="details">
+                  <NavLink to={`/products/${product.id}`}>
+                    <p>{product.name}</p>
+                  </NavLink>
+                  <span>${product.price}</span>
+                </div>
                 <div className="buttons">
-                  <button
-                    className="btn-2"
-                    onClick={() => setProductToUpdate(product)}
-                  >
+                  <PrimaryButton buttonFn={() => setProductToUpdate(product)}>
                     <FaEdit />
-                  </button>
-                  <button
-                    className="btn-2"
-                    onClick={() => handleDelete(product?.id)}
-                  >
-                    <FiDelete />
-                  </button>
+                  </PrimaryButton>
+                  <SecondaryButton buttonFn={() => handleDelete(product?.id)}>
+                    <FaTrashAlt />
+                  </SecondaryButton>
                 </div>
               </li>
             ))}
@@ -48,18 +49,17 @@ const HandleProducts = () => {
         </div>
 
         <div className="add-product">
-          <AddProduct />
+          {productToUpdate ? (
+            <UpdateProduct
+              product={productToUpdate}
+              closeFn={setProductToUpdate}
+            />
+          ) : (
+            <AddProduct />
+          )}
         </div>
       </div>
-      <div className="update-product">
-        {productToUpdate && (
-          <UpdateProduct
-            product={productToUpdate}
-            closeFn={setProductToUpdate}
-          />
-        )}
-      </div>
-    </>
+    </div>
   );
 };
 

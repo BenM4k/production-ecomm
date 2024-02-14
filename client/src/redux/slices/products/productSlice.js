@@ -48,6 +48,20 @@ export const productApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (arg) => [{ type: "product", id: arg.id }],
     }),
+    getStoreProduct: builder.query({
+      query: (page) => `/api/v1/store-products?page=${page}&pageSize=12`,
+      providesTags: (result) => {
+        if (result && Array.isArray(result.products)) {
+          const productIds = result.products.map((product) => product.id);
+          return [
+            { type: "product", id: "LIST" },
+            ...productIds.map((id) => ({ type: "product", id })),
+          ];
+        } else {
+          return { type: "product", id: "LIST" };
+        }
+      },
+    }),
   }),
 });
 
@@ -56,6 +70,7 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useGetProductsQuery,
+  useGetStoreProductQuery,
 } = productApiSlice;
 
 export const selectProductsResult =

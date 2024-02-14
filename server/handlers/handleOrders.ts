@@ -35,8 +35,9 @@ export const getOrders = async (req, res) => {
       Shipping: true,
     },
   });
+  const totalOrders = await prisma.order.count();
 
-  res.json({ orders: orders });
+  res.json({ total: totalOrders, orders: orders });
 };
 
 export const getOrder = async (req, res) => {

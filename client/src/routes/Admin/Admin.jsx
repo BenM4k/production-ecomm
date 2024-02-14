@@ -90,9 +90,8 @@ const Admin = () => {
           )}
 
           {activeTab === "orders" && (
-            <div className="users-orders">
+            <div className="admin-orders">
               <div className="dash-head">
-                <FaClipboardCheck />
                 <h2>Orders List</h2>
               </div>
               <div className="orders">

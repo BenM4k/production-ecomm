@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import { useDeleteCategoryMutation } from "../../redux/slices/category/category";
-import { FiDelete } from "react-icons/fi";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AddCategory from "../../components/adders/AddCategory";
 import UpdateCategory from "../../components/modals/UpdateCategory";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../components/buttons/SecondaryButton";
 
 const HandleCategories = () => {
   const categories = useSelector(selectCategoriesResult)?.data?.categories;
@@ -22,7 +23,7 @@ const HandleCategories = () => {
 
   return (
     <>
-      <div className="">
+      <div className="cat-body">
         <div className="dash-head">
           <h2>Categories List</h2>
         </div>
@@ -31,12 +32,12 @@ const HandleCategories = () => {
             <li key={category.id}>
               <h3>{category.name}</h3>
               <div className="buttons">
-                <button onClick={() => handleDelete(category?.id)}>
-                  <FiDelete />
-                </button>
-                <button onClick={() => setId(category?.id)}>
+                <PrimaryButton buttonFn={() => setId(category?.id)}>
                   <FaEdit />
-                </button>
+                </PrimaryButton>
+                <SecondaryButton buttonFn={() => handleDelete(category?.id)}>
+                  <FaTrashAlt />
+                </SecondaryButton>
               </div>
             </li>
           ))}
@@ -45,7 +46,7 @@ const HandleCategories = () => {
           <AddCategory />
         </div>
       </div>
-      <div className="update-category">
+      <div className={id ? "update-category" : ""}>
         {id && <UpdateCategory category={cat} setId={setId} />}
       </div>
     </>

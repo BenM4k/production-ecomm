@@ -6,7 +6,7 @@ import { useLoginMutation } from "../../redux/slices/authSlice/authSlice";
 import { setCredentials } from "../../redux/slices/users/userSlice";
 import { selectCurrentMessage } from "../../redux/slices/users/userSlice";
 
-import { setError } from "../../redux/slices/notifications/notif";
+import { setError, setSuccess } from "../../redux/slices/notifications/notif";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +30,7 @@ const Login = () => {
       setPwd("");
       setErr("");
       navigate(from, { replace: true });
+      dispatch(setSuccess("Welcome"));
     } catch (err) {
       // Handle login error
       if (!err.data) {

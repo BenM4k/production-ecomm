@@ -1,9 +1,18 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import { useUpdateProductMutation } from "../../redux/slices/products/productSlice";
+import FirstInput from "../inputs/FirstInput";
+import FirstTextArea from "../inputs/FirstTextArea";
+import CloseButton from "../buttons/CloseButton";
+import {
+  setError,
+  setSuccess,
+  setInfo,
+} from "../../redux/slices/notifications/notif";
 
 const UpdateProduct = ({ product, closeFn }) => {
+  const dispatch = useDispatch();
   const categories = useSelector(selectCategoriesResult)?.data?.categories;
   const [formData, setFormData] = useState(product);
   const handleFormChange = (e) => {
@@ -30,53 +39,58 @@ const UpdateProduct = ({ product, closeFn }) => {
         category_id: "",
       });
       closeFn(null);
+      dispatch(setSuccess(`Updated product ${formData.name} successfully`));
     } catch (error) {
+      dispatch(setError(error.message));
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    setFormData(product);
+  }, [product]);
+
   return (
     <div>
+      <div className="close-prod">
+        <CloseButton closeFn={() => closeFn(null)} />
+      </div>
       <h2>Update Product: {product.name}</h2>
       <form onSubmit={handleEditProduct}>
         <label htmlFor="name">
           Name
-          <input
+          <FirstInput
             name="name"
             type="text"
             value={formData.name}
             onChange={handleFormChange}
-            required
           />
         </label>
-        <label htmlFor="">
+        <label htmlFor="price">
           Price
-          <input
+          <FirstInput
             name="price"
             type="number"
             value={formData.price}
             onChange={handleFormChange}
-            required
           />
         </label>
-        <label htmlFor="">
+        <label htmlFor="image">
           Image
-          <input
+          <FirstInput
             name="image"
             type="text"
             value={formData.image}
             onChange={handleFormChange}
-            required
           />
         </label>
-        <label htmlFor="">
+        <label htmlFor="description">
           Description
-          <textarea
+          <FirstTextArea
             name="description"
             type="text"
             value={formData.description}
             onChange={handleFormChange}
-            required
           />
         </label>
         <select
@@ -94,7 +108,6 @@ const UpdateProduct = ({ product, closeFn }) => {
         </select>
         <button className="btn-two">Update Product</button>
       </form>
-      <button onClick={() => closeFn(null)}>close</button>
     </div>
   );
 };

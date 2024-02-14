@@ -7,7 +7,7 @@ const HandleReviews = () => {
     <div>
       <h2>Reviews</h2>
       {reviews?.map((review) => (
-        <div key={review._id}>
+        <div key={review.id}>
           <p>{review?.comment}</p>
           <p>{review?.rating}</p>
           <p>{review?.product?.name}</p>

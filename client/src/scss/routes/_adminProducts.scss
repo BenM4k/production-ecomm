@@ -1,0 +1,95 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.admin-prods {
+  .products-body {
+    padding: 1rem;
+    @include mx.flex($justify: space-between, $align: flex-start);
+
+    .dash-head {
+      flex-basis: 60%;
+      height: 650px;
+      overflow-y: scroll;
+
+      h2 {
+        margin-bottom: 16px;
+      }
+      ul {
+        @include mx.flex($dir: column);
+
+        li {
+          @include mx.flex($justify: space-between);
+          width: 100%;
+          padding: 0.5rem;
+
+          .details {
+            flex-basis: 80%;
+            @include mx.flex($justify: space-between);
+            font-size: var.$fs-text;
+            gap: 32px;
+
+            a {
+              color: var.$text-100;
+              text-decoration: underline;
+            }
+            span {
+              color: var.$primary-200;
+              font-weight: bold;
+              margin-right: 5rem;
+            }
+          }
+
+          .buttons {
+            @include mx.flex;
+            gap: 16px;
+          }
+        }
+      }
+    }
+    .add-product {
+      flex-basis: 35%;
+      position: relative;
+
+      .close-prod {
+        position: absolute;
+        right: 10px;
+      }
+
+      form {
+        @include mx.flex($dir: column);
+        gap: 16px;
+
+        label {
+          @include mx.flex($justify: space-between);
+          width: 100%;
+          gap: 5px;
+          font-size: var.$fs-text;
+
+          input,
+          textarea {
+            flex-basis: 70%;
+          }
+        }
+        select {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          width: 100%;
+          padding: 0.5rem 0.6rem;
+          border: none;
+          background-color: var.$bg-200;
+          font-size: var.$fs-text;
+          margin: 8px 0;
+          color: var.$text-100;
+          transition: box-shadow 0.2s ease-in-out;
+          cursor: pointer;
+
+          &:focus {
+            outline: none;
+            box-shadow: 1px 0px 6px 0px #61398fa6;
+          }
+        }
+      }
+    }
+  }
+}
