@@ -1,8 +1,7 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
-import { v4 as uuid } from "uuid";
 import apiSlice from "../../api/apiSlice";
-import phone from "../../../assets/watch_1.webp";
 
+const ENDPOINT = "/api/v1/banners";
 const bannersAdapter = createEntityAdapter();
 
 const initialState = bannersAdapter.getInitialState();
@@ -10,37 +9,32 @@ const initialState = bannersAdapter.getInitialState();
 export const bannerApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getBanners: builder.query({
-      query: () => "/banners",
-      transformResponse: (res) => {
-        const banners = res?.map((banner) => {
-          if (!banner.id) banner.id = uuid();
-          if (!banner.img) banner.img = phone;
-          return banner;
-        });
-        return bannersAdapter.setAll(initialState, banners);
+      query: () => ENDPOINT,
+      providesTags: (result) => {
+        if (result && Array.isArray(result.banners)) {
+          const bannersIds = result?.banners?.map((banner) => banner.id);
+          return [
+            { type: "banner", id: "LIST" },
+            ...bannersIds?.map((id) => ({ type: "banner", id })),
+          ];
+        } else {
+          return { type: "banner", id: "LIST" };
+        }
       },
-      providesTags: (result) =>
-        result
-          ? [
-              { type: "banner", id: "LIST" },
-              ...result?.ids?.map((id) => ({ type: "banner", id })),
-            ]
-          : [{ type: "banner", id: "LIST" }],
     }),
     addBanner: builder.mutation({
       query: (banner) => ({
-        url: "/banners",
+        url: ENDPOINT,
         method: "POST",
         body: {
           ...banner,
-          id: uuid(),
         },
       }),
       invalidatesTags: [{ type: "banner", id: "LIST" }],
     }),
     deleteBanner: builder.mutation({
       query: ({ id }) => ({
-        url: `/banners/${id}`,
+        url: `${ENDPOINT}/${id}`,
         method: "DELETE",
         body: { id },
       }),

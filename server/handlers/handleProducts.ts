@@ -22,7 +22,17 @@ export const createProduct = async (req, res) => {
 export const getProducts = async (req, res) => {
   const products = await prisma.product.findMany({
     include: {
-      Review: true,
+      Review: {
+        include: {
+          user: {
+            select: {
+              first_name: true,
+              last_name: true,
+              email: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -32,16 +42,47 @@ export const getProducts = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   const { id } = req.params;
-  const product = await prisma.product.findUnique({
-    where: {
-      id: id,
-    },
-    include: {
-      Review: true,
-    },
-  });
 
-  res.json({ product: product });
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        Review: {
+          include: {
+            user: {
+              select: {
+                first_name: true,
+                last_name: true,
+                email: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!product) {
+      res.status(400).json({ error: "Product not found" });
+      return;
+    }
+
+    const suggestedProducts = await prisma.product.findMany({
+      where: {
+        category_id: product.category_id,
+        NOT: {
+          id: id,
+        },
+      },
+      take: 4,
+    });
+
+    res.json({ product: product, suggestedProducts });
+  } catch (err) {
+    console.log(err);
+    res.status(401).json({ error: "Error while getting product" });
+  }
 };
 
 export const updateProduct = async (req, res) => {

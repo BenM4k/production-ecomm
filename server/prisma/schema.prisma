@@ -179,3 +179,10 @@ model review {
   user       user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   product    product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
 }
+
+model banner {
+  id       String @id @default(uuid())
+  title    String
+  desc     String
+  imageUrl String
+}

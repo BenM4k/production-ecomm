@@ -4,11 +4,13 @@ import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { useDeleteProductMutation } from "../../redux/slices/products/productSlice";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AddProduct from "../../components/adders/AddProduct";
-import { useState } from "react";
-import UpdateProduct from "../../components/modals/UpdateProduct";
+import { Suspense, useState, lazy } from "react";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 
+const UpdateProduct = lazy(() =>
+  import("../../components/modals/UpdateProduct")
+);
 const HandleProducts = () => {
   const [productToUpdate, setProductToUpdate] = useState(null);
   const products = useSelector(selectProductsResult)?.data?.products;
@@ -50,10 +52,12 @@ const HandleProducts = () => {
 
         <div className="add-product">
           {productToUpdate ? (
-            <UpdateProduct
-              product={productToUpdate}
-              closeFn={setProductToUpdate}
-            />
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <UpdateProduct
+                product={productToUpdate}
+                closeFn={setProductToUpdate}
+              />
+            </Suspense>
           ) : (
             <AddProduct />
           )}

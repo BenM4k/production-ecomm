@@ -27,9 +27,18 @@ export const getReview = async (req, res) => {
 };
 
 export const getReviews = async (req, res) => {
-  const reviews = await prisma.review.findMany();
+  const reviews = await prisma.review.findMany({
+    include: {
+      user: {
+        select: {
+          first_name: true,
+          last_name: true,
+          email: true,
+        },
+      },
+    },
+  });
   const totalReviews = await prisma.review.count();
-
   res.json({ total: totalReviews, reviews: reviews });
 };
 

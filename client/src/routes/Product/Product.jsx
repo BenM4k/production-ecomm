@@ -6,38 +6,56 @@ import Feedback from "./Feedback";
 import ProductImage from "./ProductImage";
 import { addToCart } from "../../redux/slices/users/userSlice";
 import { useEffect } from "react";
+import FirstRating from "../../components/ratings/FirstRating";
+import { useGetSingleProductQuery } from "../../redux/slices/products/productSlice";
 
 const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const handleAddToCart = (prod) => {
     dispatch(addToCart(prod));
   };
-  const products = useSelector(selectProductsResult)?.data?.products;
-  const product = products.find((p) => p.id === id);
-  const suggested = products.filter(
-    (p) => p.category_id === product.category_id && p.id !== product.id
-  );
+  const product = data?.product;
+  const suggested = data?.suggestedProducts;
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [id]);
 
+  if (isLoading)
+    return (
+      <div className="product-container">
+        <h1>Loading...</h1>
+      </div>
+    );
+  if (isError)
+    return (
+      <div className="product-container">
+        <h1>Error getting product.</h1>
+      </div>
+    );
   return (
     <div className="product-container">
       <div className="prod-head">
         <div className="left">
           <div className="nav">
-            <NavLink to="/store">Browse All </NavLink>
-            <NavLink to="/categories"> Category </NavLink>
-            <p>{product?.name}</p>
+            <NavLink to="/store">
+              <span>Browse All </span> &#8594;
+            </NavLink>
+            <NavLink to="/categories">
+              <span>Category</span> &#8594;
+            </NavLink>
+            <p>{product.name}</p>
           </div>
-          <h2>{product?.name}</h2>
+          <h2>{product.name}</h2>
           <div className="price">
-            <span>${product?.price}</span>
-            <p>Reviews</p>
+            <p>${product?.price}</p>
+            <div className="ratings">
+              <FirstRating reviews={product.Review} />
+            </div>
           </div>
-          <p className="desc">{product?.description}</p>
+          <p className="desc">{product.description}</p>
           <div className="select">
             <p>variant</p>
             <select name="" id="">

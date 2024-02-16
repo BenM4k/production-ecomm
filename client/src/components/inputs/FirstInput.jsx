@@ -1,12 +1,6 @@
-import React from "react";
+import { memo } from "react";
 
-const FirstInput = React.memo(function FirstInput({
-  id,
-  name,
-  type,
-  value,
-  onChange,
-}) {
+const FirstInput = ({ id, name, type, value, onChange }) => {
   return (
     <input
       id={id}
@@ -18,6 +12,6 @@ const FirstInput = React.memo(function FirstInput({
       required
     />
   );
-});
+};
 
-export default FirstInput;
+export default memo(FirstInput);

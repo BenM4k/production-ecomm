@@ -1,14 +1,16 @@
+import { memo } from "react";
 import { useSelector } from "react-redux";
 import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import { selectOrdersResult } from "../../redux/slices/order/orderSlice";
+import { selectBannersResult } from "../../redux/slices/banners/banners";
 import { FaUser, FaClipboardCheck, FaImage } from "react-icons/fa";
 import { TbCategory } from "react-icons/tb";
 import { BsFillBagCheckFill } from "react-icons/bs";
 
 const Records = () => {
   const totalOrders = useSelector(selectOrdersResult).data?.total;
-  const banners = [];
+  const totalBanners = useSelector(selectBannersResult).data?.total;
   const totalCategories = useSelector(selectCategoriesResult).data?.total;
   const users = [];
   const totalProducts = useSelector(selectProductsResult).data?.total;
@@ -32,7 +34,7 @@ const Records = () => {
       </li>
       <li>
         <FaImage />
-        <p>{banners?.length}</p>
+        <p>{totalBanners}</p>
         <span>Banners</span>
       </li>
       <li>
@@ -44,4 +46,4 @@ const Records = () => {
   );
 };
 
-export default Records;
+export default memo(Records);

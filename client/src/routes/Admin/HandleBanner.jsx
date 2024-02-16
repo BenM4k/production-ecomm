@@ -1,9 +1,11 @@
 import { FiDelete } from "react-icons/fi";
 import { FaEdit, FaImage } from "react-icons/fa";
+import AddBanner from "../../components/adders/AddBanner";
+import { selectBannersResult } from "../../redux/slices/banners/banners";
+import { useSelector } from "react-redux";
 
 const HandleBanners = () => {
-  // const banners = useSelector((store) => store.banner);
-  const banners = [];
+  const banners = useSelector(selectBannersResult).data?.banners;
 
   return (
     <>
@@ -14,7 +16,7 @@ const HandleBanners = () => {
       <ul className="admin-banners">
         {banners?.map((banner) => (
           <li key={banner.title}>
-            <img src={banner.img} alt={banner.title} />
+            <img src={banner.imageUrl} alt={banner.title} />
             <div className="admin-banner-desc">
               <h3>{banner.title}</h3>
               <p>{banner.desc}</p>
@@ -30,7 +32,9 @@ const HandleBanners = () => {
           </li>
         ))}
       </ul>
-      <div className="add-category"></div>
+      <div className="add-banner">
+        <AddBanner />
+      </div>
     </>
   );
 };

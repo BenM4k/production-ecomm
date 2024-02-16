@@ -1,107 +1,237 @@
-@use '../reset/variables' as var;
-@use '../reset/mixins' as mx;
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
 
 .product-container {
-    padding: 0 256px;
-    .prod-head {
+  padding: 0 256px;
+  @include mx.flex($dir: column);
+
+  h1 {
+    text-align: center;
+    padding: 5rem;
+  }
+  .prod-head {
+    @include mx.flex($justify: space-between);
+    align-content: stretch;
+    .left {
+      flex-basis: 48%;
+      @include mx.flex(
+        $justify: space-between,
+        $dir: column wrap,
+        $align: flex-start
+      );
+
+      .nav {
+        flex-basis: 100%;
+        @include mx.flex;
+        padding: 16px 0;
+        font-size: var.$fs-text;
+        gap: 4px;
+
+        a {
+          span {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      h2 {
+        color: var.$primary-200;
+        font-weight: var.$fw-title;
+        font-size: var.$fs-h2;
+        padding-bottom: 16px;
+      }
+
+      .price {
+        @include mx.flex;
+
+        p {
+          padding-right: 1rem;
+          margin-right: 1rem;
+          font-weight: var.$fw-title;
+          font-size: var.$fs-h6;
+          border-right: 2px solid black;
+        }
+      }
+
+      .desc {
+        padding: 16px 0;
+        font-size: var.$fs-text;
+      }
+
+      .ratings {
+        .stars {
+          .star {
+            font-size: 24px;
+            &.filled {
+              color: rgb(199, 199, 31);
+            }
+          }
+        }
+      }
+      .variant {
+        button {
+          padding: 0.4rem 0.2rem;
+          margin-right: 8px;
+        }
+      }
+      .select {
+        width: 90%;
+        padding: 16px 0;
+        select {
+          padding: 0.5rem;
+          width: 100%;
+        }
+      }
+
+      button {
+        margin: 8px 0;
+      }
+    }
+    .right {
+      flex-basis: 48%;
+      @include mx.flex($justify: space-between);
+      align-content: stretch;
+
+      .first {
+        flex-basis: 100%;
+        height: 500px;
+        overflow: hidden;
+      }
+      div {
+        flex-basis: 19%;
+      }
+    }
+  }
+
+  .feedback {
+    padding: 4rem 0;
+    width: 100%;
+    @include mx.flex($justify: space-between, $align: flex-start);
+
+    h2 {
+      flex-basis: 100%;
+    }
+
+    ul {
+      flex-basis: 45%;
+      margin-top: 32px;
+      @include mx.flex($dir: column wrap, $align: flex-start);
+      gap: 8px;
+
+      li {
+        width: 100%;
+        padding: 8px 32px;
         @include mx.flex($justify: space-between);
-        align-content: stretch;
-        .left {
-            flex-basis: 48%;
-            @include mx.flex($justify: space-between, $dir: column wrap, $align: flex-start);
-
-            .nav {
-                flex-basis: 100%;
-                @include mx.flex;
-                padding: 16px 0;
-                font-size: var.$fs-text;
-            }
-
-            h2 {
-                color: var.$primary-200;
-                font-weight: var.$fw-title;
-                font-size: var.$fs-h2;
-                padding-bottom: 16px;
-            }
-
-            .price {
-                @include mx.flex;
-
-                span {
-                    border-right: 2px solid black;
-                    padding-right: 8px;
-                    font-weight: var.$fw-title;
-                    font-size: var.$fs-h6;
-                }
-            }
-
-            .desc {
-                padding: 16px 0;
-                font-size: var.$fs-text;
-            }
-
-            .variant {
-                button {
-                    padding: .4rem .2rem;
-                    margin-right: 8px;
-                }
-            }
-            .select {
-                width: 90%;
-                padding: 16px 0;
-                select{
-                    padding: .5rem;
-                    width: 100%
-                }
-            }
-
-            button {
-                margin: 8px 0;
-            }
+        &:nth-child(odd) {
+          background-color: var.$bg-200;
         }
-        .right {
-            flex-basis: 48%;
+
+        .stars {
+          .star {
+            font-size: 24px;
+            &.filled {
+              color: rgb(199, 199, 31);
+            }
+          }
+        }
+
+        .info {
+          p {
+            font-size: var.$fs-text;
+            span {
+              text-transform: capitalize;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+
+    form {
+      textarea {
+        width: 100%;
+        height: 160px;
+        box-shadow: 1px 0px 6px 0px #61398fa6;
+
+        &:focus {
+          box-shadow: 1px 0px 6px 0px var.$primary-200;
+        }
+      }
+
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        padding: 0.5rem 0.6rem;
+        border: none;
+        background-color: var.$bg-200;
+        font-size: var.$fs-text;
+        margin: 16px 0;
+        color: var.$text-100;
+        transition: box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+        box-shadow: 1px 0px 6px 0px #61398fa6;
+
+        &:focus {
+          outline: none;
+          box-shadow: 1px 0px 6px 0px var.$primary-200;
+
+          option {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .suggested {
+    @include mx.flex($dir: column wrap);
+    padding: 3rem 0;
+    width: 100%;
+
+    h2 {
+      margin-bottom: 3rem;
+    }
+    ul {
+      @include mx.flex($justify: space-around);
+      width: 100%;
+
+      li {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        border-radius: 2rem;
+        flex-basis: 23%;
+        @include mx.flex($dir: column);
+
+        a {
+          color: var.$text-100;
+
+          .detail {
             @include mx.flex($justify: space-between);
-            align-content: stretch;
+            padding: 8px 0;
+            font-weight: var.$fw-text;
+            font-size: var.$fs-h6;
+          }
 
-            .first {
-                flex-basis: 100%;
-                height: 500px;
-                overflow: hidden;
-            }
-            div {
-                flex-basis: 19%;
-            }
+          img {
+            object-fit: cover;
+          }
         }
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        p {
+          text-align: center;
+          font-size: var.$fs-text;
+          font-weight: bold;
+        }
+      }
     }
-
-    .feedback {
-        padding-top: 32px;
-
-        ul {
-            width: 100%;
-            margin-top: 32px;
-            @include mx.flex($dir: column wrap, $align: flex-start);
-            gap: 8px;
-
-            li {
-                width: 100%;
-                padding: 8px;
-                &:nth-child(odd) {
-                    background-color: var.$bg-200;
-                }
-            }
-        }
+    img {
+      width: 240px;
     }
-
-    .suggested {
-        @include mx.flex($dir: column wrap);
-
-        ul {
-            @include mx.flex;
-        }
-        img {
-            width: 240px
-        }
-    }
+  }
 }

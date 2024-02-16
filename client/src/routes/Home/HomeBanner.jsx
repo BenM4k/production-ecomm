@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { selectAllBanners } from "../../redux/slices/banners/banners";
+import { selectBannersResult } from "../../redux/slices/banners/banners";
 import { NavLink } from "react-router-dom";
 import Page from "../../components/Page";
 
 const HomeBanner = () => {
-  const banners = useSelector(selectAllBanners);
+  const banners = useSelector(selectBannersResult).data?.banners;
   return (
     <>
       <Page data={banners} />

@@ -62,6 +62,12 @@ export const productApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    getSingleProduct: builder.query({
+      query: (id) => `${ENDPOINT}/${id}`,
+      providesTags: (result, error, args) => {
+        return [{ type: "product", id: args }];
+      },
+    }),
   }),
 });
 
@@ -71,6 +77,7 @@ export const {
   useUpdateProductMutation,
   useGetProductsQuery,
   useGetStoreProductQuery,
+  useGetSingleProductQuery,
 } = productApiSlice;
 
 export const selectProductsResult =

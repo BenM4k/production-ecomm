@@ -1,65 +1,23 @@
-import { useState } from "react";
-import { BsFillBagCheckFill } from "react-icons/bs";
-import { TbCategory } from "react-icons/tb";
-import { FaUser, FaClipboardCheck, FaImage } from "react-icons/fa";
+import { Suspense, lazy, useState } from "react";
+import { FaUser } from "react-icons/fa";
 
-import HandleUsers from "./HandleUsers";
-import HandleProducts from "./HandleProduct";
-import HandleCategories from "./HandleCategories";
-import HandleBanners from "./HandleBanner";
-import HandleOrders from "./HandleOrder";
 import Records from "./Records";
-import HandleReviews from "./HandleReviews";
+import NavList from "./NavList";
+import HandleUsers from "./HandleUsers";
+
+const HandleBanners = lazy(() => import("./HandleBanner"));
+const HandleCategories = lazy(() => import("./HandleCategories"));
+const HandleOrders = lazy(() => import("./HandleOrder"));
+const HandleProducts = lazy(() => import("./HandleProduct"));
+const HandleReviews = lazy(() => import("./HandleReviews"));
 
 const Admin = () => {
-  const myList = [
-    {
-      name: "Users",
-      pic: <FaUser />,
-    },
-    {
-      name: "Categories",
-      pic: <TbCategory />,
-    },
-    {
-      name: "Orders",
-      pic: <FaClipboardCheck />,
-    },
-    {
-      name: "Banners",
-      pic: <FaImage />,
-    },
-    {
-      name: "Products",
-      pic: <BsFillBagCheckFill />,
-    },
-    {
-      name: "Reviews",
-      pic: <TbCategory />,
-    },
-  ];
   const [activeTab, setActiveTab] = useState(() => "users");
-
   const users = [];
-
-  const handleDisplay = (category) => {
-    setActiveTab(category);
-  };
 
   return (
     <div className="admin-wrapper">
-      <div className="nav-list">
-        {myList.map((list) => (
-          <button
-            key={list.name}
-            onClick={() => handleDisplay(list?.name.toLowerCase())}
-            className={activeTab === list?.name.toLowerCase() ? "active" : ""}
-          >
-            {list.pic}
-            <span>{list.name}</span>
-          </button>
-        ))}
-      </div>
+      <NavList activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div className="content">
         <Records />
@@ -75,17 +33,25 @@ const Admin = () => {
             </div>
           )}
 
-          {activeTab === "products" && <HandleProducts />}
+          {activeTab === "products" && (
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <HandleProducts />
+            </Suspense>
+          )}
 
           {activeTab === "categories" && (
             <div className="admin-cat">
-              <HandleCategories />
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <HandleCategories />
+              </Suspense>
             </div>
           )}
 
           {activeTab === "banners" && (
             <div className="dash-banners">
-              <HandleBanners />
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <HandleBanners />
+              </Suspense>
             </div>
           )}
 
@@ -95,13 +61,17 @@ const Admin = () => {
                 <h2>Orders List</h2>
               </div>
               <div className="orders">
-                <HandleOrders />
+                <Suspense fallback={<h1>Loading...</h1>}>
+                  <HandleOrders />
+                </Suspense>
               </div>
             </div>
           )}
           {activeTab === "reviews" && (
             <>
-              <HandleReviews />
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <HandleReviews />
+              </Suspense>
             </>
           )}
         </div>

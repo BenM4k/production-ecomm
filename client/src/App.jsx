@@ -6,17 +6,16 @@ import RequireAuth from "./components/RequireAuth";
 import { Route, Routes } from "react-router-dom";
 import PersistentLogin from "./components/PersistentLogin";
 import LoggedOut from "./components/LoggedOut";
-import Login from "./routes/Login/Login";
+import Store from "./routes/Store/Store";
+import Product from "./routes/Product/Product";
 
 const Admin = lazy(() => import("./routes/Admin/Admin"));
 const Cart = lazy(() => import("./routes/Cart/Cart"));
 const Category = lazy(() => import("./routes/Category/Category"));
-// const Login = lazy(() => import("./routes/Login/Login"));
+const Login = lazy(() => import("./routes/Login/Login"));
 const NotFound = lazy(() => import("./routes/NotFound/NotFound"));
-const Product = lazy(() => import("./routes/Product/Product"));
 const Profile = lazy(() => import("./routes/Profile/Profile"));
 const SignUp = lazy(() => import("./routes/SignUp/SignUp"));
-const Store = lazy(() => import("./routes/Store/Store"));
 const Unauthorized = lazy(() => import("./routes/Unauthorized/Unauthorized"));
 const Order = lazy(() => import("./routes/Order/Order"));
 

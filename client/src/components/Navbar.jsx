@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo_3.svg";
 import { selectCurrentUser, selectCart } from "../redux/slices/users/userSlice";
+import { memo } from "react";
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
@@ -43,7 +44,7 @@ const Navbar = () => {
               </li>
             )}
             <li>
-              <NavLink to="/cart">
+              <NavLink to="/cart" className={"cart"}>
                 cart{" "}
                 <span className={cart.length ? "cart-total" : ""}>
                   {cart.length ? cart.length : ""}
@@ -71,4 +72,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

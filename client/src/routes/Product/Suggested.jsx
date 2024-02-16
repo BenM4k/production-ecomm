@@ -5,7 +5,7 @@ const Suggested = ({ suggested }) => {
     <>
       <h2>In the same category</h2>
       <ul>
-        {suggested?.slice(0, 4).map((product) => (
+        {suggested.map((product) => (
           <li key={product?.id}>
             <NavLink to={`/products/${product.id}`}>
               <img src={phone} alt={product.name} />

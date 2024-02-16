@@ -1,4 +1,6 @@
-const FirstTextArea = ({ id, name, type, value, onChange }) => {
+import { memo } from "react";
+
+const FirstTextArea = ({ id, name, type, value, onChange, placeholder }) => {
   return (
     <>
       <textarea
@@ -8,10 +10,11 @@ const FirstTextArea = ({ id, name, type, value, onChange }) => {
         type={type}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         required
       />
     </>
   );
 };
 
-export default FirstTextArea;
+export default memo(FirstTextArea);

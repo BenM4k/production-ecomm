@@ -6,14 +6,14 @@ import App from "./App.jsx";
 import store from "./redux/store";
 import "./index.scss";
 
-// import { bannerApiSlice } from './redux/slices/banners/banners';
+import { bannerApiSlice } from "./redux/slices/banners/banners";
 import { orderApiSlice } from "./redux/slices/order/orderSlice.js";
 import { categoryApiSlice } from "./redux/slices/category/category";
 import { productApiSlice } from "./redux/slices/products/productSlice";
 import { reviewsApiSlice } from "./redux/slices/review/reviewSlice.js";
 // import { testimonialSlice } from './redux/slices/testimonials/testimonials'
 
-// store.dispatch(bannerApiSlice.endpoints.getBanners.initiate());
+store.dispatch(bannerApiSlice.endpoints.getBanners.initiate());
 store.dispatch(categoryApiSlice.endpoints.getCategories.initiate());
 store.dispatch(productApiSlice.endpoints.getProducts.initiate());
 store.dispatch(orderApiSlice.endpoints.getOrders.initiate());

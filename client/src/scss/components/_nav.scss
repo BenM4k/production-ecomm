@@ -1,68 +1,74 @@
-@use '../reset/variables' as var;
-@use '../reset/mixins' as mx;
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
 
 nav {
-    @include mx.flex($justify: space-around);
-    // padding: 28px 64px;
-    height: 80px;
-    background: var.$bg-300;
+  @include mx.flex($justify: space-around);
+  // padding: 28px 64px;
+  height: 80px;
+  background: var.$bg-300;
 
-    ul {
+  ul {
+    @include mx.flex;
+    gap: 20px;
+    height: 100%;
+
+    li {
+      height: 100%;
+      @include mx.flex;
+      transition: all 0.1s;
+
+      .cart {
+        overflow: hidden;
+        width: 65px;
+        .cart-total {
+          color: var.$primary-300;
+          font-size: var.$fs-text;
+          text-align: center;
+          background-color: rgb(197, 56, 56);
+          border-radius: 50%;
+          padding: 4px 8px;
+          margin-left: 4px;
+        }
+      }
+      a {
         @include mx.flex;
-        gap: 20px;
+        text-decoration: none;
+        color: var.$text-100;
+        font-weight: var.$fw-text;
+        font-size: var.$fs-text;
+        text-transform: capitalize;
         height: 100%;
+        transition: all 0.3s;
+      }
 
-        li {
-            height: 100%;
-            @include mx.flex;
-            transition: all .1s;
-            a{
-                @include mx.flex;
-                text-decoration: none;
-                color: var.$text-100;
-                font-weight: var.$fw-text;
-                font-size: var.$fs-text;
-                text-transform: capitalize;
-                height: 100%;
-                transition: all .3s;
-
-                .cart-total {
-                    color: var.$primary-300;
-                    background-color: rgb(197, 56, 56);
-                    border-radius: 50%;
-                    padding: 0 8px;
-                    margin-left: 8px;
-                }
-            }
-
-            &:hover{
-                border-bottom: 3.5px solid var.$text-100;
-            }
-        }
-
-        .cta {
-            a {
-                background-color: var.$primary-200;
-                color: var.$primary-300;
-                padding: 5px 10px;
-                height: 40%;
-            }
-            &:hover {
-                border: none;
-                opacity: .8;
-            }
-        }
+      &:hover {
+        border-bottom: 3.5px solid var.$text-100;
+      }
     }
 
-    .logo {
-        height: 100%;
-        width: 90px;
-        padding: 10px 0;
-
-        a{
-            display: block;
-            height: 100%;
-            width: 100%;
-        }
+    .cta {
+      a {
+        background-color: var.$primary-200;
+        color: var.$primary-300;
+        padding: 5px 10px;
+        height: 40%;
+      }
+      &:hover {
+        border: none;
+        opacity: 0.8;
+      }
     }
+  }
+
+  .logo {
+    height: 100%;
+    width: 90px;
+    padding: 10px 0;
+
+    a {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
