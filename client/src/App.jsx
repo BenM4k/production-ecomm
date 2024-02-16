@@ -39,7 +39,7 @@ function App() {
 
               <Route element={<RequireAuth role={"USER"} />}>
                 <Route path="shipping" element={<Order />} />
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/dashboard" element={<Admin />} />
                 <Route path="/profile/:uname" element={<Profile />} />
                 <Route path="/cart" element={<Cart />} />
               </Route>

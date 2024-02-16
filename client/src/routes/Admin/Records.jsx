@@ -4,7 +4,14 @@ import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import { selectOrdersResult } from "../../redux/slices/order/orderSlice";
 import { selectBannersResult } from "../../redux/slices/banners/banners";
-import { FaUser, FaClipboardCheck, FaImage } from "react-icons/fa";
+import { selectUsersResult } from "../../redux/slices/appUsers/appUsersSlice";
+import { selectReviewsResult } from "../../redux/slices/review/reviewSlice";
+import {
+  FaUser,
+  FaClipboardCheck,
+  FaImage,
+  FaClipboardList,
+} from "react-icons/fa";
 import { TbCategory } from "react-icons/tb";
 import { BsFillBagCheckFill } from "react-icons/bs";
 
@@ -12,14 +19,16 @@ const Records = () => {
   const totalOrders = useSelector(selectOrdersResult).data?.total;
   const totalBanners = useSelector(selectBannersResult).data?.total;
   const totalCategories = useSelector(selectCategoriesResult).data?.total;
-  const users = [];
+  const TotalUsers = useSelector(selectUsersResult).data?.total;
   const totalProducts = useSelector(selectProductsResult).data?.total;
+  const totalReviews = useSelector(selectReviewsResult).data?.total;
+  console.log(totalReviews);
 
   return (
     <ul className="content-header">
       <li>
         <FaUser />
-        <p>{users?.length}</p>
+        <p>{TotalUsers}</p>
         <span>Users</span>
       </li>
       <li>
@@ -41,6 +50,11 @@ const Records = () => {
         <BsFillBagCheckFill />
         <p>{totalProducts}</p>
         <span>Products</span>
+      </li>
+      <li>
+        <FaClipboardList />
+        <p>{totalReviews}</p>
+        <span>Reviews</span>
       </li>
     </ul>
   );

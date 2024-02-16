@@ -56,6 +56,11 @@ export const getReviews = async (req, res) => {
             email: true,
           },
         },
+        product: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
     const totalReviews = await prisma.review.count();

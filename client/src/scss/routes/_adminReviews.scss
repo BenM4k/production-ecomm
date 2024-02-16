@@ -1,0 +1,46 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.admin-reviews {
+  padding: 1rem;
+
+  h2 {
+    flex-basis: 100%;
+    margin: 1rem 0;
+  }
+
+  ul {
+    @include mx.flex($justify: space-between, $align: flex-start);
+    height: 600px;
+    padding: 1rem;
+    overflow-y: scroll;
+
+    li {
+      flex-basis: 23%;
+      padding: 1rem;
+      box-shadow: 1px 4px 6px 2px #dfd8d8;
+
+      .buttons {
+        @include mx.flex($justify: flex-start);
+        gap: 8px;
+      }
+
+      .name {
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      p {
+        font-size: var.$fs-text;
+      }
+
+      .stars {
+        .star {
+          font-size: 15px;
+          &.filled {
+            color: rgb(199, 199, 31);
+          }
+        }
+      }
+    }
+  }
+}

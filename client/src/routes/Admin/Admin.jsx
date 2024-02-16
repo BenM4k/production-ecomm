@@ -13,7 +13,6 @@ const HandleReviews = lazy(() => import("./HandleReviews"));
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState(() => "users");
-  const users = [];
 
   return (
     <div className="admin-wrapper">
@@ -24,12 +23,11 @@ const Admin = () => {
 
         <div className="content-body">
           {activeTab === "users" && (
-            <div className="users">
+            <div className="admin-users">
               <div className="dash-head">
-                <FaUser />
                 <h2>Users List</h2>
               </div>
-              {users?.length ? <HandleUsers /> : <p>No users to display</p>}
+              <HandleUsers />
             </div>
           )}
 

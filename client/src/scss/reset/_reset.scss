@@ -59,10 +59,10 @@ svg {
 
 button {
   cursor: pointer;
-  transition: scale ease-in;
+  transition: scale 0.6s ease-in-out;
 
   &:hover {
-    scale: 1.02;
+    transform: scale(1.01);
   }
 }
 /* Inherit fonts for inputs and buttons */

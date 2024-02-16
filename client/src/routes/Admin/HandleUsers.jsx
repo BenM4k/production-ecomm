@@ -1,24 +1,32 @@
 import { useSelector } from "react-redux";
-import { FaEdit } from "react-icons/fa";
-import { FiDelete } from "react-icons/fi";
+import { selectUsersResult } from "../../redux/slices/appUsers/appUsersSlice";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+import SecondaryButton from "../../components/buttons/SecondaryButton";
 
 const HandleUsers = () => {
-  const { users } = useSelector((store) => store.user);
+  const users = useSelector(selectUsersResult).data?.users;
   const handleDeleteUser = (id) => {
     if (!id) return;
   };
   return (
-    <ul>
-      {users.map((user, i) => (
-        <li key={i}>
-          <h4>{user?.firstname}</h4>
-          <div className="">
-            <button>
-              <FiDelete />
-            </button>
-            <button onClick={() => handleDeleteUser(user.id)}>
+    <ul className="user-list">
+      {users?.map((user, i) => (
+        <li key={i} className="user">
+          <h4>
+            {user?.first_name} - {user.last_name}
+          </h4>
+          <ul className="attributes">
+            <li>Reviews: {user.Review.length}</li>
+            <li>Orders: {user.Order.length}</li>
+          </ul>
+          <div className="buttons">
+            <PrimaryButton>
               <FaEdit />
-            </button>
+            </PrimaryButton>
+            <SecondaryButton>
+              <FaTrashAlt />
+            </SecondaryButton>
           </div>
         </li>
       ))}

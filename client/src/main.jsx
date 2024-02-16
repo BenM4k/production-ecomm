@@ -11,6 +11,7 @@ import { orderApiSlice } from "./redux/slices/order/orderSlice.js";
 import { categoryApiSlice } from "./redux/slices/category/category";
 import { productApiSlice } from "./redux/slices/products/productSlice";
 import { reviewsApiSlice } from "./redux/slices/review/reviewSlice.js";
+import { appUsersApiSlice } from "./redux/slices/appUsers/appUsersSlice.js";
 // import { testimonialSlice } from './redux/slices/testimonials/testimonials'
 
 store.dispatch(bannerApiSlice.endpoints.getBanners.initiate());
@@ -18,6 +19,7 @@ store.dispatch(categoryApiSlice.endpoints.getCategories.initiate());
 store.dispatch(productApiSlice.endpoints.getProducts.initiate());
 store.dispatch(orderApiSlice.endpoints.getOrders.initiate());
 store.dispatch(reviewsApiSlice.endpoints.getReviews.initiate());
+store.dispatch(appUsersApiSlice.endpoints.getUsers.initiate());
 // store.dispatch(testimonialSlice.endpoints.getTestimonials.initiate());
 
 ReactDOM.createRoot(document.getElementById("root")).render(

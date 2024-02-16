@@ -40,7 +40,7 @@ const Navbar = () => {
           <>
             {user?.role === "ADMIN" && (
               <li>
-                <NavLink to="/admin">admin</NavLink>
+                <NavLink to="/dashboard">dashboard</NavLink>
               </li>
             )}
             <li>

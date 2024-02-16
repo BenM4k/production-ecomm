@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { generateBoundary } from "../../lib/genBoundary";
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: 'https://production-ecomm-api.onrender.com',

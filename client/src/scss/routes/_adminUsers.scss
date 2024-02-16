@@ -1,0 +1,39 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.admin-users {
+  @include mx.flex($dir: column);
+  padding: 1rem;
+
+  .dash-head {
+    width: 100%;
+  }
+
+  .user-list {
+    margin-top: 2rem;
+    width: 100%;
+    @include mx.flex($justify: flex-start, $align: flex-start);
+    gap: 16px;
+    height: 600px;
+    padding: 0.3rem;
+    overflow-y: scroll;
+
+    .user {
+      box-shadow: 1px 4px 6px 2px #dfd8d8;
+      padding: 1rem;
+      flex-basis: 12%;
+      font-size: var.$fs-text;
+      h4 {
+        text-transform: capitalize;
+      }
+      ul {
+        margin: 0.5rem 0;
+      }
+
+      .buttons {
+        @include mx.flex($justify: flex-start);
+        gap: 8px;
+      }
+    }
+  }
+}

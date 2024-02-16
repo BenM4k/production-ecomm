@@ -1,5 +1,10 @@
 import { BsFillBagCheckFill } from "react-icons/bs";
-import { FaClipboardCheck, FaImage, FaUser } from "react-icons/fa";
+import {
+  FaClipboardCheck,
+  FaImage,
+  FaUser,
+  FaClipboardList,
+} from "react-icons/fa";
 import { TbCategory } from "react-icons/tb";
 
 const NavList = ({ activeTab, setActiveTab }) => {
@@ -26,7 +31,7 @@ const NavList = ({ activeTab, setActiveTab }) => {
     },
     {
       name: "Reviews",
-      pic: <TbCategory />,
+      pic: <FaClipboardList />,
     },
   ];
 
