@@ -173,9 +173,10 @@ select {
   color: var.$text-100;
   outline: none;
   transition: box-shadow 0.2s ease-in-out;
+  box-shadow: 1px 0px 6px 0px #61398fa6;
 
   &:focus {
-    box-shadow: 1px 0px 6px 0px #61398fa6;
+    box-shadow: 1px 0px 6px 0px var.$primary-200;
   }
 }
 
@@ -189,9 +190,10 @@ select {
   color: var.$text-100;
   outline: none;
   transition: box-shadow 0.2s ease-in-out;
+  box-shadow: 1px 0px 6px 0px #61398fa6;
 
   &:focus {
-    box-shadow: 1px 0px 6px 0px #61398fa6;
+    box-shadow: 1px 0px 6px 0px var.$primary-200;
   }
 }
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

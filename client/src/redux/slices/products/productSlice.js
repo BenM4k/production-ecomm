@@ -30,7 +30,10 @@ export const productApiSlice = apiSlice.injectEndpoints({
           ...product,
         },
       }),
-      invalidatesTags: [{ type: "product", id: "LIST" }],
+      invalidatesTags: [
+        { type: "product", id: "LIST" },
+        { type: "category", id: "LIST" },
+      ],
     }),
     updateProduct: builder.mutation({
       query: (product) => ({
@@ -38,7 +41,10 @@ export const productApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: { ...product },
       }),
-      invalidatesTags: [{ type: "product", id: "LIST" }],
+      invalidatesTags: [
+        { type: "product", id: "LIST" },
+        { type: "category", id: "LIST" },
+      ],
     }),
     deleteProduct: builder.mutation({
       query: (id) => ({
@@ -65,7 +71,10 @@ export const productApiSlice = apiSlice.injectEndpoints({
     getSingleProduct: builder.query({
       query: (id) => `${ENDPOINT}/${id}`,
       providesTags: (result, error, args) => {
-        return [{ type: "product", id: args }];
+        return [
+          { type: "product", id: args },
+          { type: "product", id: "LIST" },
+        ];
       },
     }),
   }),

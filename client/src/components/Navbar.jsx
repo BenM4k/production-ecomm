@@ -9,8 +9,8 @@ const Navbar = () => {
   const cart = useSelector(selectCart);
   const links = [
     {
-      name: "about",
-      path: "/about",
+      name: "home",
+      path: "/",
     },
     {
       name: "store",

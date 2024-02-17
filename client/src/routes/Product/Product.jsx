@@ -43,7 +43,7 @@ const Product = () => {
             <NavLink to="/store">
               <span>Browse All </span> &#8594;
             </NavLink>
-            <NavLink to="/categories">
+            <NavLink to={`/categories/${product.category_id}`}>
               <span>Category</span> &#8594;
             </NavLink>
             <p>{product.name}</p>

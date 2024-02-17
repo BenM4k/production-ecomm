@@ -26,7 +26,7 @@ const Home = () => {
         </div>
         <img src={phone} alt="some image" />
       </div>
-      <div className="categories">
+      <div className="home-categories">
         <HomeCategories />
       </div>
       <div className="featured">

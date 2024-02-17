@@ -9,26 +9,45 @@ import {
   setError,
   setInfo,
 } from "../../redux/slices/notifications/notif";
+import FirstTextArea from "../inputs/FirstTextArea";
 
 const UpdateCategory = ({ category, setId }) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState(category.name);
+  const [formData, setFormData] = useState({
+    name: category?.name,
+    description: category?.description,
+  });
+
   const [updateCategory] = useUpdateCategoryMutation();
 
   useEffect(() => {
-    setName(category.name);
+    setFormData({
+      name: category.name,
+      description: category.description,
+    });
   }, [category]);
+
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleEditCategory = (e) => {
     e.preventDefault();
-    const newCategory = { ...category, name: name };
+    const newCategory = {
+      ...category,
+      name: formData.name,
+      description: formData.description,
+    };
     try {
-      if (name === category.name) {
+      if (newCategory.name === category.name) {
         dispatch(setInfo("Please update category name"));
         return;
       }
       updateCategory(newCategory).unwrap();
-      setName("");
+      setFormData({});
       dispatch(setSuccess(`Updated category ${category.name} successfully`));
     } catch (err) {
       dispatch(setError(err.message));
@@ -47,11 +66,23 @@ const UpdateCategory = ({ category, setId }) => {
         Update category <span>{category.name}</span>
       </h2>
       <form onSubmit={handleEditCategory}>
-        <FirstInput
-          type={"text"}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <label htmlFor="name">
+          <FirstInput
+            type={"text"}
+            name={"name"}
+            value={formData.name}
+            onChange={handleFormChange}
+          />
+        </label>
+        <label htmlFor="description">
+          <FirstTextArea
+            id={"description"}
+            name={"description"}
+            value={formData.description}
+            onChange={handleFormChange}
+            placeholder={"category description"}
+          />
+        </label>
         <PrimaryButton>Update</PrimaryButton>
       </form>
     </div>

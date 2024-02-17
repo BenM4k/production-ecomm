@@ -1,0 +1,49 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.category-detail {
+  padding: 16px 256px;
+  min-height: 650px;
+  overflow-y: scroll;
+  @include mx.flex($dir: column, $justify: flex-start);
+
+  .desc {
+    font-size: var.$fs-text;
+    text-wrap: balance;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 3px solid var.$text-200;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 32px;
+    padding: 64px 0;
+    li {
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border-radius: 2rem;
+
+      a {
+        color: var.$text-100;
+
+        .detail {
+          @include mx.flex($justify: space-between);
+          padding: 8px 0;
+          font-weight: var.$fw-text;
+          font-size: var.$fs-h6;
+        }
+
+        img {
+          object-fit: cover;
+        }
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}

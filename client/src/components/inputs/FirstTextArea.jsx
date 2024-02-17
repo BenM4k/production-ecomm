@@ -12,6 +12,7 @@ const FirstTextArea = ({ id, name, type, value, onChange, placeholder }) => {
         onChange={onChange}
         placeholder={placeholder}
         required
+        minLength={20}
       />
     </>
   );

@@ -11,7 +11,10 @@ import Product from "./routes/Product/Product";
 
 const Admin = lazy(() => import("./routes/Admin/Admin"));
 const Cart = lazy(() => import("./routes/Cart/Cart"));
-const Category = lazy(() => import("./routes/Category/Category"));
+const Categories = lazy(() => import("./routes/Category/Categories"));
+const CategoryDetail = lazy(() =>
+  import("./routes/CategoryDetail/CategoryDetail")
+);
 const Login = lazy(() => import("./routes/Login/Login"));
 const NotFound = lazy(() => import("./routes/NotFound/NotFound"));
 const Profile = lazy(() => import("./routes/Profile/Profile"));
@@ -27,7 +30,8 @@ function App() {
           <Route element={<PersistentLogin />}>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/category/:category" element={<Category />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/categories/:id" element={<CategoryDetail />} />
               <Route path="/*" element={<NotFound />} />
               <Route path="/products/:id" element={<Product />} />
               <Route path="/store" element={<Store />} />

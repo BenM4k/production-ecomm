@@ -24,6 +24,15 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    getSingleCategory: builder.query({
+      query: (id) => `${ENDPOINT}/${id}`,
+      providesTags: (result, error, args) => {
+        return [
+          { type: "category", id: args },
+          { type: "category", id: "LIST" },
+        ];
+      },
+    }),
     addCategory: builder.mutation({
       query: (category) => ({
         url: ENDPOINT,
@@ -60,6 +69,7 @@ export const {
   useDeleteCategoryMutation,
   useGetCategoriesQuery,
   useUpdateCategoryMutation,
+  useGetSingleCategoryQuery,
 } = categoryApiSlice;
 
 export const selectCategoriesResult =

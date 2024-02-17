@@ -1,11 +1,12 @@
 import prisma from "../db";
 
 export const createCategory = async (req, res) => {
-  const { name } = req.body;
+  const { name, description } = req.body;
   try {
     const category = await prisma.category.create({
       data: {
         name: name,
+        description: description,
       },
     });
 
@@ -22,6 +23,9 @@ export const getCategory = async (req, res) => {
     const category = await prisma.category.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        Product: true,
       },
     });
     res.json({ category: category });
@@ -45,7 +49,7 @@ export const getCategories = async (req, res) => {
 
 export const updateCategory = async (req, res) => {
   const { id } = req.params;
-  const { name } = req.body;
+  const { name, description } = req.body;
   try {
     const category = await prisma.category.update({
       where: {
@@ -53,6 +57,7 @@ export const updateCategory = async (req, res) => {
       },
       data: {
         name: name,
+        description: description,
       },
     });
 
