@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { useSelector } from "react-redux";
 import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
@@ -22,7 +21,6 @@ const Records = () => {
   const TotalUsers = useSelector(selectUsersResult).data?.total;
   const totalProducts = useSelector(selectProductsResult).data?.total;
   const totalReviews = useSelector(selectReviewsResult).data?.total;
-  console.log(totalReviews);
 
   return (
     <ul className="content-header">
@@ -60,4 +58,4 @@ const Records = () => {
   );
 };
 
-export default memo(Records);
+export default Records;

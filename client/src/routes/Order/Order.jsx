@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useAddOrderMutation } from "../../redux/slices/order/orderSlice";
 import { clearCart } from "../../redux/slices/users/userSlice";
 import { setSuccess, setError } from "../../redux/slices/notifications/notif";
-import { throttle } from "../../lib/throttle";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -28,12 +27,11 @@ const Order = () => {
     total += amount;
     const orderProduct = {
       product_id: product.id,
-      quantity: product.quantity,
+      quantity: product.itemCount,
       subtotal: parseFloat(amount),
     };
     orderDetailData.push(orderProduct);
   });
-
   const [addOrder] = useAddOrderMutation();
 
   const handleSubmitOrder = (e) => {

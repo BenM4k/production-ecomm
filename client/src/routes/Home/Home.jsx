@@ -3,8 +3,12 @@ import HomeCategories from "./HomeCategories";
 import HomeProducts from "./HomeProducts";
 import phone from "../../assets/phone_2.png";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Dream Sale";
+  });
   return (
     <section className="home">
       <div className="banner">

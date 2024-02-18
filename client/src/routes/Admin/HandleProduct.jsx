@@ -4,7 +4,7 @@ import { selectProductsResult } from "../../redux/slices/products/productSlice";
 import { useDeleteProductMutation } from "../../redux/slices/products/productSlice";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AddProduct from "../../components/adders/AddProduct";
-import { Suspense, useState, lazy } from "react";
+import { Suspense, useState, lazy, useEffect } from "react";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 
@@ -22,6 +22,10 @@ const HandleProducts = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    document.title = "Products List";
+  });
 
   return (
     <div className="admin-prods">

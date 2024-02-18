@@ -1,0 +1,164 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.profile {
+  width: 100%;
+  padding: 2rem 256px;
+  .profile-container {
+    padding: 1rem;
+    @include mx.flex($justify: space-between);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 28px;
+    background-color: var.$bg-100;
+
+    .user-nav {
+      @include mx.flex($dir: column, $justify: flex-start, $align: flex-start);
+      flex-basis: 13%;
+      min-height: 650px;
+
+      h2,
+      ul {
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        width: 100%;
+      }
+      .nav-btn {
+        border: none;
+        background-color: var.$bg-100;
+        width: 100%;
+        margin: 0.3rem 0;
+        padding: 0.6rem;
+        text-transform: capitalize;
+        text-align: start;
+        font-size: var.$fs-text;
+        font-weight: bold;
+        color: var.$text-100;
+        border-radius: 0.3rem;
+
+        &.active {
+          background-color: var.$primary-200;
+          color: var.$bg-300;
+          &:hover {
+            background-color: var.$primary-200;
+            color: var.$bg-300;
+          }
+        }
+
+        &:hover {
+          background-color: var.$bg-300;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+      }
+
+      .logout-btn {
+        margin-top: auto;
+      }
+    }
+    .user-details,
+    .user-orders {
+      flex-basis: 85%;
+      height: 650px;
+      padding: 0.8rem;
+      border-radius: 0.3rem;
+      background-color: var.$bg-300;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    .user-details {
+      @include mx.flex($dir: column, $justify: flex-start);
+      gap: 0.7rem;
+
+      img {
+        height: 120px;
+        width: 120px;
+        background-color: var.$bg-100;
+        border-radius: 50%;
+      }
+
+      button {
+        @include mx.flex;
+        font-size: var.$fs-text;
+        gap: 5px;
+        svg {
+          flex-basis: 30%;
+        }
+      }
+    }
+
+    .user-orders {
+      @include mx.flex($dir: column, $justify: flex-start);
+      overflow-y: scroll;
+
+      .empty {
+        margin-top: 1rem;
+      }
+
+      ul {
+        @include mx.flex($dir: column);
+        gap: 8px;
+        width: 100%;
+        padding-top: 1rem;
+        li {
+          @include mx.flex($justify: flex-start);
+          font-size: var.$fs-text;
+          gap: 16px;
+          width: 100%;
+
+          .order-id {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 110px;
+
+            a {
+              color: var.$text-100;
+              text-decoration: underline;
+            }
+          }
+
+          .order-address {
+            flex-basis: 16%;
+          }
+
+          .order-track {
+            flex-basis: 27%;
+          }
+
+          .order-status {
+            flex-basis: 10%;
+
+            &.pending,
+            &.cancelled {
+              p {
+                color: red;
+              }
+            }
+
+            &.paid,
+            &.shipped,
+            &.delivered {
+              p {
+                color: green;
+              }
+            }
+          }
+
+          .order-total {
+            flex-basis: 5%;
+
+            p {
+              color: green;
+              font-weight: bold;
+            }
+          }
+
+          .buttons {
+            @include mx.flex();
+            gap: 8px;
+          }
+        }
+      }
+    }
+  }
+}

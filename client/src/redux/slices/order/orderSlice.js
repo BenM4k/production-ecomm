@@ -22,6 +22,15 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    getSingleOrder: builder.query({
+      query: (id) => `${ENDPOINT}/${id}`,
+      providesTags: (result, error, args) => {
+        return [
+          { type: "order", id: "LIST" },
+          { type: "order", id: args },
+        ];
+      },
+    }),
     addOrder: builder.mutation({
       query: (order) => ({
         url: ENDPOINT,
@@ -30,7 +39,11 @@ export const orderApiSlice = apiSlice.injectEndpoints({
           ...order,
         },
       }),
-      invalidatesTags: [{ type: "order", id: "LIST" }],
+      invalidatesTags: [
+        { type: "order", id: "LIST" },
+        { type: "product", id: "LIST" },
+        { type: "user", id: "LIST" },
+      ],
     }),
     deleteOrder: builder.mutation({
       query: ({ id }) => ({
@@ -47,6 +60,7 @@ export const {
   useAddOrderMutation,
   useDeleteOrderMutation,
   useGetOrdersQuery,
+  useGetSingleOrderQuery,
 } = orderApiSlice;
 
 export const selectOrdersResult = orderApiSlice.endpoints.getOrders.select();

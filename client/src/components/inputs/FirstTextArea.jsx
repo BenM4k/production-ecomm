@@ -1,5 +1,3 @@
-import { memo } from "react";
-
 const FirstTextArea = ({ id, name, type, value, onChange, placeholder }) => {
   return (
     <>
@@ -18,4 +16,4 @@ const FirstTextArea = ({ id, name, type, value, onChange, placeholder }) => {
   );
 };
 
-export default memo(FirstTextArea);
+export default FirstTextArea;

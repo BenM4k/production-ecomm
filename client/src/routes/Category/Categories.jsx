@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import Category from "./Category";
+import { useEffect } from "react";
 
 const Categories = () => {
   const categories = useSelector(selectCategoriesResult).data?.categories;
+
+  useEffect(() => {
+    document.title = "Categories";
+  });
 
   return (
     <div className="categories">

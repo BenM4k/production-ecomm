@@ -3,12 +3,14 @@ import { selectUsersResult } from "../../redux/slices/appUsers/appUsersSlice";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
+import { useEffect } from "react";
 
 const HandleUsers = () => {
   const users = useSelector(selectUsersResult).data?.users;
-  const handleDeleteUser = (id) => {
-    if (!id) return;
-  };
+
+  useEffect(() => {
+    document.title = "Users List";
+  });
   return (
     <ul className="user-list">
       {users?.map((user, i) => (

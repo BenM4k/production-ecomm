@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "../../redux/slices/authSlice/authSlice";
@@ -31,6 +31,10 @@ const SignUp = () => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    document.title = "Register";
+  });
 
   return (
     <form onSubmit={handleSubmit}>

@@ -1,0 +1,1 @@
+import{r as n,j as o}from"./index-1d193954.js";const p=({id:t,name:r,type:s,value:e,onChange:i})=>o.jsx("input",{id:t,name:r,className:"first-input",type:s,value:e,onChange:i,required:!0}),a=n.memo(p);export{a as F};

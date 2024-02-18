@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo_3.svg";
 import { selectCurrentUser, selectCart } from "../redux/slices/users/userSlice";
-import { memo } from "react";
 
 const Navbar = () => {
   const user = useSelector(selectCurrentUser);
@@ -72,4 +71,4 @@ const Navbar = () => {
   );
 };
 
-export default memo(Navbar);
+export default Navbar;

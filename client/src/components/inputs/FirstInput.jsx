@@ -1,5 +1,3 @@
-import { memo } from "react";
-
 const FirstInput = ({ id, name, type, value, onChange }) => {
   return (
     <input
@@ -14,4 +12,4 @@ const FirstInput = ({ id, name, type, value, onChange }) => {
   );
 };
 
-export default memo(FirstInput);
+export default FirstInput;

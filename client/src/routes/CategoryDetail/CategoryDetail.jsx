@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleCategoryQuery } from "../../redux/slices/category/category";
 import Product from "../Home/Product";
+import { useEffect } from "react";
 
 const CategoryDetail = () => {
   const { id } = useParams();
@@ -8,6 +9,10 @@ const CategoryDetail = () => {
 
   const category = data?.category;
   const products = data?.category.Product;
+
+  useEffect(() => {
+    document.title = category?.name ? category.name : "category";
+  });
 
   if (isLoading)
     return (

@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectProductsResult } from "../../redux/slices/products/productSlice";
+import { useDispatch } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import Suggested from "./Suggested";
 import Feedback from "./Feedback";
@@ -21,7 +20,8 @@ const Product = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-  }, [id]);
+    document.title = product?.name ? product.name : "Product page";
+  }, [id, product?.name]);
 
   if (isLoading)
     return (

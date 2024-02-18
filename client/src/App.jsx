@@ -15,6 +15,7 @@ const Categories = lazy(() => import("./routes/Category/Categories"));
 const CategoryDetail = lazy(() =>
   import("./routes/CategoryDetail/CategoryDetail")
 );
+const OrderDetails = lazy(() => import("./routes/OrderDetails/OrderDetails"));
 const Login = lazy(() => import("./routes/Login/Login"));
 const NotFound = lazy(() => import("./routes/NotFound/NotFound"));
 const Profile = lazy(() => import("./routes/Profile/Profile"));
@@ -30,22 +31,100 @@ function App() {
           <Route element={<PersistentLogin />}>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/categories/:id" element={<CategoryDetail />} />
-              <Route path="/*" element={<NotFound />} />
+              <Route
+                path="/categories"
+                element={
+                  <Suspense fallback={<MainSpinner />}>
+                    <Categories />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/categories/:id"
+                element={
+                  <Suspense fallback={<MainSpinner />}>
+                    <CategoryDetail />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/*"
+                element={
+                  <Suspense fallback={<MainSpinner />}>
+                    <NotFound />
+                  </Suspense>
+                }
+              />
               <Route path="/products/:id" element={<Product />} />
               <Route path="/store" element={<Store />} />
               <Route element={<LoggedOut />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<SignUp />} />
+                <Route
+                  path="/login"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <Login />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/register"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <SignUp />
+                    </Suspense>
+                  }
+                />
               </Route>
-              <Route path="/Unauthorized" element={<Unauthorized />} />
+              <Route
+                path="/Unauthorized"
+                element={
+                  <Suspense fallback={<MainSpinner />}>
+                    <Unauthorized />
+                  </Suspense>
+                }
+              />
 
               <Route element={<RequireAuth role={"USER"} />}>
-                <Route path="shipping" element={<Order />} />
-                <Route path="/dashboard" element={<Admin />} />
-                <Route path="/profile/:uname" element={<Profile />} />
-                <Route path="/cart" element={<Cart />} />
+                <Route
+                  path="/shipping"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <Order />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/orders/:id"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <OrderDetails />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <Admin />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/profile/:uname"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <Profile />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <Suspense fallback={<MainSpinner />}>
+                      <Cart />
+                    </Suspense>
+                  }
+                />
               </Route>
             </Route>
           </Route>

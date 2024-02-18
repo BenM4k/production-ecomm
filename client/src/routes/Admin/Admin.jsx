@@ -1,5 +1,4 @@
 import { Suspense, lazy, useState } from "react";
-import { FaUser } from "react-icons/fa";
 
 import Records from "./Records";
 import NavList from "./NavList";

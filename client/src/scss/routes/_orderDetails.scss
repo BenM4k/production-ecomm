@@ -1,0 +1,107 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.orders-detail {
+  width: 100%;
+  padding: 2rem 256px;
+
+  .detail-container {
+    padding: 1rem;
+    @include mx.flex($justify: space-between, $align: flex-start);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 28px;
+    background-color: var.$bg-100;
+
+    .order-items {
+      @include mx.flex($dir: column, $align: flex-start);
+      flex-basis: 65%;
+      gap: 16px;
+
+      .product-list {
+        padding: 1rem;
+        min-height: 400px;
+        width: 100%;
+        border-radius: 0.3rem;
+        background-color: var.$bg-300;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 28px;
+        @include mx.flex(
+          $justify: flex-start,
+          $align: flex-start,
+          $dir: column
+        );
+
+        h3 {
+          text-transform: uppercase;
+        }
+
+        ul {
+          @include mx.flex();
+          margin-top: 1rem;
+
+          li {
+            @include mx.flex($justify: flex-start);
+            gap: 16px;
+            width: 100%;
+
+            img {
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+      }
+
+      .shipping-address {
+        padding: 1rem;
+        width: 100%;
+        border-radius: 0.3rem;
+        background-color: var.$bg-300;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 28px;
+
+        h3 {
+          text-transform: uppercase;
+        }
+        p {
+          font-size: var.$fs-text;
+
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .order-info {
+      flex-basis: 32%;
+      padding: 1rem;
+      border-radius: 0.3rem;
+      background-color: var.$bg-300;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 28px;
+
+      h3 {
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        width: 100%;
+        font-size: var.$fs-text;
+        span {
+          font-weight: bold;
+        }
+      }
+
+      .status {
+        margin: 1rem 0;
+        @include mx.flex($dir: column);
+        gap: 8px;
+
+        p {
+          padding: 0.5rem;
+          text-align: center;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 28px;
+          background-color: rgba(249, 47, 96, 0.2);
+        }
+      }
+    }
+  }
+}

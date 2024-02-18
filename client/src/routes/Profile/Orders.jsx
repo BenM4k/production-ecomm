@@ -1,22 +1,14 @@
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectOrdersResult } from "../../redux/slices/order/orderSlice";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
-import { useEffect } from "react";
 
-const HandleOrders = () => {
-  const orders = useSelector(selectOrdersResult).data?.orders;
-
-  useEffect(() => {
-    document.title = "Orders List";
-  });
+const Orders = ({ userOrders }) => {
   return (
-    <>
+    <div className="user-orders">
+      <h2>My orders</h2>
       <ul>
-        {orders.length ? (
-          orders?.map((order) => (
+        {userOrders?.length ? (
+          userOrders?.map((order) => (
             <li key={order?.id} className="order-list">
               <div className="order-id ">
                 <h4>id</h4>
@@ -34,16 +26,24 @@ const HandleOrders = () => {
                 className={`order-status ${order.order_status.toLowerCase()}`}
               >
                 <h4>Status</h4>
+                <p>
+                  {order.Shipping[0].status === "INPROGRESS"
+                    ? "IN-PROGRESS"
+                    : order.Shipping[0].status}
+                </p>
+              </div>
+              <div
+                className={`order-status ${order.order_status.toLowerCase()}`}
+              >
+                <h4>Payment</h4>
                 <p>{order.order_status}</p>
               </div>
+
               <div className="order-total ">
                 <h4>Total</h4>
                 <p>${order.total_amount}</p>
               </div>
               <div className="buttons">
-                <PrimaryButton>
-                  <FaEdit />
-                </PrimaryButton>
                 <SecondaryButton>
                   <FaTrashAlt />
                 </SecondaryButton>
@@ -51,11 +51,11 @@ const HandleOrders = () => {
             </li>
           ))
         ) : (
-          <p>No orders to display</p>
+          <h4 className="empty">No available orders</h4>
         )}
       </ul>
-    </>
+    </div>
   );
 };
 
-export default HandleOrders;
+export default Orders;

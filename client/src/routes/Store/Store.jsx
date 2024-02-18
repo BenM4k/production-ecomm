@@ -12,6 +12,7 @@ const Store = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
+    document.title = "Store";
   }, [currentPage]);
 
   return (

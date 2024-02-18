@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../redux/slices/users/userSlice";
 import CartProduct from "./CartProduct";
+import { useEffect } from "react";
 
 const Cart = () => {
   const cart = useSelector(selectCart);
@@ -11,6 +12,10 @@ const Cart = () => {
   cart?.forEach((item) => {
     let amount = item.price * item.itemCount;
     total += amount;
+  });
+
+  useEffect(() => {
+    document.title = "Cart";
   });
 
   return (

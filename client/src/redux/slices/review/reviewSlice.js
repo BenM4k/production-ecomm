@@ -33,6 +33,7 @@ export const reviewsApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: [
         { type: "review", id: "LIST" },
         { type: "product", id: "LIST" },
+        { type: "user", id: "LIST" },
       ],
     }),
     deleteReview: builder.mutation({

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -44,6 +44,11 @@ const Login = () => {
       }
     }
   };
+
+  useEffect(() => {
+    document.title = "Login";
+  });
+
   return (
     <>
       <h1>Login</h1>

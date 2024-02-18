@@ -4,9 +4,15 @@ import FirstRating from "../../components/ratings/FirstRating";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
+import { useEffect } from "react";
 
 const HandleReviews = () => {
   const reviews = useSelector(selectReviewsResult).data?.reviews;
+
+  useEffect(() => {
+    document.title = "Reviews List";
+  });
+
   return (
     <div className="admin-reviews">
       <h2>Reviews</h2>

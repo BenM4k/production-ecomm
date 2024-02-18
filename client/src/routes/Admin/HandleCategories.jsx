@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCategoriesResult } from "../../redux/slices/category/category";
 import { useDeleteCategoryMutation } from "../../redux/slices/category/category";
@@ -21,6 +21,10 @@ const HandleCategories = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    document.title = "Categories List";
+  });
 
   return (
     <>
