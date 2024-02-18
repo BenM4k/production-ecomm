@@ -33,7 +33,7 @@ const Feedback = ({ reviews, product }) => {
 
   useEffect(() => {
     setFormData({ ...formData, product_id: product.id });
-  }, [product, formData]);
+  }, [product]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

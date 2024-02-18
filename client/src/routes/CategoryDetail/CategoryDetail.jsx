@@ -11,7 +11,7 @@ const CategoryDetail = () => {
   const products = data?.category.Product;
 
   useEffect(() => {
-    document.title = category?.name ? category.name : "category";
+    document.title = category?.name ? category.name : document.title;
   });
 
   if (isLoading)

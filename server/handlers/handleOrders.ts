@@ -65,7 +65,13 @@ export const getOrder = async (req, res) => {
         id: id,
       },
       include: {
-        OrderDetail: true,
+        OrderDetail: {
+          select: {
+            product: true,
+            quantity: true,
+          },
+        },
+        Shipping: true,
         user: {
           select: {
             first_name: true,

@@ -8,6 +8,7 @@ import {
   updateOrder,
 } from "../handlers/handleOrders";
 import { handleInputErrors } from "../middlewares/validate";
+import { protect } from "../utils/auth";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.post(
   handleInputErrors,
   createOrder
 );
-router.get("/orders/:id", getOrder);
+router.get("/orders/:id", protect, getOrder);
 router.put(
   "/orders/:id",
   body("total_amount").optional().isNumeric(),

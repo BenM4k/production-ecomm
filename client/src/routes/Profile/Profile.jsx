@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 import Main from "./Main";
 import Orders from "./Orders";
 import { selectCurrentUser } from "../../redux/slices/users/userSlice";
-import { useLogoutQuery } from "../../redux/slices/authSlice/authSlice";
+import { useLogoutMutation } from "../../redux/slices/authSlice/authSlice";
 import { logOut } from "../../redux/slices/users/userSlice";
 import { selectOrdersResult } from "../../redux/slices/order/orderSlice";
 import { setNotice, setError } from "../../redux/slices/notifications/notif";
@@ -17,7 +17,7 @@ const Profile = () => {
   const orders = useSelector(selectOrdersResult).data?.orders;
   const user = useSelector(selectCurrentUser);
   const userOrders = orders.filter((order) => order.user_id === user.id);
-  const { refetch } = useLogoutQuery();
+  const [logout] = useLogoutMutation();
 
   useEffect(() => {
     document.title = `${user.first_name} ${user.last_name}`;
@@ -25,7 +25,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await refetch();
+      await logout();
       dispatch(logOut());
       navigate("/login");
       dispatch(setNotice("Logged out"));

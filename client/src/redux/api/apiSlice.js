@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setCredentials, logOut } from "../slices/users/userSlice";
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: 'https://production-ecomm-api.onrender.com',
@@ -16,15 +17,14 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result.error?.originalStatus === 401) {
+  if (result.error?.status === 401) {
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
-    console.log(refreshResult);
     if (refreshResult?.data) {
       const user = api.getState().auth.user;
-      api.dispatch(getState().setCredentials({ ...refreshResult?.data, user }));
+      api.dispatch(setCredentials({ ...refreshResult?.data, user }));
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(getState().logOut());
+      api.dispatch(logOut());
     }
   }
 

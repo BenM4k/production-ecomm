@@ -5,6 +5,7 @@ import handleLogout from "../handlers/handleLogout";
 import handleRefreshToken from "../handlers/handleRefresh";
 import handleRegistration from "../handlers/handleRegister";
 import { handleInputErrors } from "../middlewares/validate";
+import { protect } from "../utils/auth";
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.post(
   handleInputErrors,
   handleLogin
 );
-router.get("/logout", handleLogout);
+router.post("/logout", handleLogout);
 router.get("/refresh", handleRefreshToken);
 router.post(
   "/register",

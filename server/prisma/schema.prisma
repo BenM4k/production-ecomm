@@ -54,7 +54,7 @@ model payment {
 }
 
 enum ShippingStatus {
-  PENDING
+  INPROGRESS
   SHIPPED
   DELIVERED
 }
@@ -64,7 +64,7 @@ model shipping {
   order_id        String
   address         String
   tracking_number String         @default(uuid())
-  status          ShippingStatus @default(PENDING)
+  status          ShippingStatus @default(INPROGRESS)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   belongsTo       order          @relation(fields: [order_id], references: [id], onDelete: Cascade)
@@ -73,8 +73,6 @@ model shipping {
 enum OrderStatus {
   PENDING
   PAID
-  SHIPPED
-  DELIVERED
   CANCELLED
 }
 

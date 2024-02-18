@@ -7,6 +7,7 @@ const handleRefreshToken = async (req, res) => {
     const cookie = req.cookies.jwt;
 
     if (!cookie) {
+      console.log("could not find a refresh token cookie");
       res
         .status(401)
         .json({ message: "could not find a refresh token cookie" });

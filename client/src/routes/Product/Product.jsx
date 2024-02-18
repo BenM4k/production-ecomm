@@ -20,9 +20,11 @@ const Product = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    document.title = product?.name ? product.name : "Product page";
-  }, [id, product?.name]);
+  }, [id]);
 
+  useEffect(() => {
+    document.title = product?.name ? product.name : document.title;
+  }, [product]);
   if (isLoading)
     return (
       <div className="product-container">
