@@ -43,8 +43,6 @@ const Order = () => {
       shipping_data: formData,
     };
 
-    console.log(order);
-
     if (formData.address) {
       try {
         addOrder(order).unwrap();

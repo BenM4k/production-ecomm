@@ -92,20 +92,25 @@ export const getOrder = async (req, res) => {
 export const updateOrder = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_id, order_date, total_amount, order_status } = req.body;
+    const { payment_status, shipping_status, shipping_id } = req.body;
 
     const order = await prisma.order.update({
       where: {
         id: id,
       },
       data: {
-        user_id: user_id,
-        order_date: order_date,
-        total_amount: total_amount,
-        order_status: order_status,
+        order_status: payment_status,
       },
     });
 
+    const shipping = await prisma.shipping.update({
+      where: {
+        id: shipping_id,
+      },
+      data: {
+        status: shipping_status,
+      },
+    });
     res.json({ order: order });
   } catch (error) {
     console.log("Error updating order", error);

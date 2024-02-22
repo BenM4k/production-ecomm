@@ -8,7 +8,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { ...credentials },
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: [
+        { type: "user", id: "LIST" },
+        { type: "banner", id: "LIST" },
+      ],
     }),
     refresh: builder.query({
       query: () => ({

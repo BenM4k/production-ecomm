@@ -17,6 +17,7 @@ router.post(
   "/orders",
   body("total_amount").isNumeric(),
   handleInputErrors,
+  protect,
   createOrder
 );
 router.get("/orders/:id", protect, getOrder);
@@ -25,8 +26,9 @@ router.put(
   body("total_amount").optional().isNumeric(),
   body("order_status").optional().isString(),
   handleInputErrors,
+  protect,
   updateOrder
 );
-router.delete("/orders/:id", deleteOrder);
+router.delete("/orders/:id", protect, deleteOrder);
 
 export default router;

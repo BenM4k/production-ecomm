@@ -51,11 +51,8 @@ const UpdateProduct = ({ product, closeFn }) => {
   }, [product]);
 
   return (
-    <div>
-      <div className="close-prod">
-        <CloseButton closeFn={() => closeFn(null)} />
-      </div>
-      <h2>Update Product: {product.name}</h2>
+    <div className="update-product">
+      <h3>Update Product: {product.name}</h3>
       <form onSubmit={handleEditProduct}>
         <label htmlFor="name">
           Name

@@ -25,7 +25,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout().unwrap();
       dispatch(logOut());
       navigate("/login");
       dispatch(setNotice("Logged out"));

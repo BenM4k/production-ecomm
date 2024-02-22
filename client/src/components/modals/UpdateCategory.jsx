@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useUpdateCategoryMutation } from "../../redux/slices/category/category";
-import CloseButton from "../buttons/CloseButton";
 import FirstInput from "../inputs/FirstInput";
 import PrimaryButton from "../buttons/PrimaryButton";
 import {
@@ -48,6 +47,7 @@ const UpdateCategory = ({ category, setId }) => {
       }
       updateCategory(newCategory).unwrap();
       setFormData({});
+      setId(null);
       dispatch(setSuccess(`Updated category ${category.name} successfully`));
     } catch (err) {
       dispatch(setError(err.message));
@@ -56,17 +56,13 @@ const UpdateCategory = ({ category, setId }) => {
   };
 
   return (
-    <div>
-      <div className="close-cat">
-        <CloseButton closeFn={() => setId(null)}>
-          <p>close</p>
-        </CloseButton>
-      </div>
+    <div className="update-category">
       <h2>
         Update category <span>{category.name}</span>
       </h2>
       <form onSubmit={handleEditCategory}>
         <label htmlFor="name">
+          Name
           <FirstInput
             type={"text"}
             name={"name"}
@@ -75,6 +71,7 @@ const UpdateCategory = ({ category, setId }) => {
           />
         </label>
         <label htmlFor="description">
+          Description
           <FirstTextArea
             id={"description"}
             name={"description"}

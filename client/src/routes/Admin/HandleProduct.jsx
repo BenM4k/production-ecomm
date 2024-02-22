@@ -7,6 +7,7 @@ import AddProduct from "../../components/adders/AddProduct";
 import { Suspense, useState, lazy, useEffect } from "react";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
+import Modal from "../../components/modals/Modal";
 
 const UpdateProduct = lazy(() =>
   import("../../components/modals/UpdateProduct")
@@ -55,15 +56,19 @@ const HandleProducts = () => {
         </div>
 
         <div className="add-product">
-          {productToUpdate ? (
-            <Suspense fallback={<h1>Loading...</h1>}>
-              <UpdateProduct
-                product={productToUpdate}
-                closeFn={setProductToUpdate}
-              />
-            </Suspense>
-          ) : (
-            <AddProduct />
+          <AddProduct />
+          {productToUpdate && (
+            <Modal
+              isOpen={productToUpdate}
+              onClose={() => setProductToUpdate(null)}
+            >
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <UpdateProduct
+                  product={productToUpdate}
+                  closeFn={setProductToUpdate}
+                />
+              </Suspense>
+            </Modal>
           )}
         </div>
       </div>

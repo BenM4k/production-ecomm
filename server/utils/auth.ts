@@ -43,7 +43,7 @@ export const hashPwd = async (pwd) => {
 export const protect = (req, res, next) => {
   const bearer = req.headers.authorization;
   if (!bearer) {
-    console.log("token not found");
+    console.log("protect: token not found in headers.");
     res.status(401).json({ message: "Token not found" });
     return;
   }
@@ -58,12 +58,41 @@ export const protect = (req, res, next) => {
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
     req.user = user;
-    // if (user.role === "ADMIN") {
     if (user) {
       next();
     } else {
-      // res.status(401).json({ message: "You must be an admin" });
       res.status(401).json({ message: "No user found" });
+      return;
+    }
+  } catch (e) {
+    res.status(401).json({ message: "Token not found" });
+    return;
+  }
+};
+
+export const isAdmin = (req, res, next) => {
+  const bearer = req.headers.authorization;
+  if (!bearer) {
+    console.log("token not found in headers");
+    res.status(401).json({ message: "Token not found" });
+    return;
+  }
+
+  const [, token] = bearer.split(" ");
+
+  if (!token) {
+    res.status(401).json({ message: "Token not found" });
+    return;
+  }
+
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+    if (user.role === "ADMIN") {
+      next();
+    } else {
+      console.log("Request made by a non Amin user");
+      res.status(401).json({ message: "You must be an admin" });
       return;
     }
   } catch (e) {

@@ -47,6 +47,9 @@ export const getProducts = async (req, res) => {
           },
         },
       },
+      orderBy: {
+        updatedAt: 'desc',
+      },
     });
 
     const totalProducts = await prisma.product.count();

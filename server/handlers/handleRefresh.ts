@@ -32,7 +32,7 @@ const handleRefreshToken = async (req, res) => {
     }
 
     jwt.verify(refreshToken, process.env.JWT_SECRET_REFRESH, (err, decoded) => {
-      if (err || user.email !== decoded.email) return res.sendStatus(403);
+      // if (err || user.email !== decoded.email) return res.sendStatus(403);
       const token = createJWT(user);
       const responseUser = {
         id: user.id,

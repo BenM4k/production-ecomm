@@ -2,6 +2,7 @@ import express from "express";
 import { getBanners, createBanner } from "../handlers/handleBanners";
 import multer from "multer";
 import path from "path";
+import { isAdmin } from "../utils/auth";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -16,7 +17,7 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.get("/banners", getBanners);
-router.post("/banners", upload.single("file"), createBanner);
+router.get("/banners", isAdmin, getBanners);
+router.post("/banners", isAdmin, upload.single("file"), createBanner);
 
 export default router;

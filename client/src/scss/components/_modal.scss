@@ -1,0 +1,147 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+//modals
+#portal {
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .modal-content {
+      background-color: #fff;
+      width: 500px;
+      height: 500px;
+      margin: 10rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      overflow: hidden;
+
+      .close-btn {
+        float: right;
+      }
+
+      .update-category {
+        border-radius: 5px;
+        margin-top: 8px;
+        transition: all 0.2s ease-in-out;
+
+        h2 {
+          margin: 10px 0;
+          width: fit-content;
+
+          span {
+            color: var.$primary-200;
+          }
+        }
+
+        form {
+          @include mx.flex(
+            $justify: space-between,
+            $dir: column,
+            $align: flex-start
+          );
+
+          label {
+            width: 100%;
+            font-size: var.$fs-text;
+          }
+          textarea {
+            width: 100%;
+            height: 90px;
+          }
+        }
+        .close-cat {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+        }
+      }
+
+      .update-product,
+      .update-user {
+        h3 {
+          margin-bottom: 1rem;
+        }
+        form {
+          @include mx.flex($dir: column);
+          gap: 8px;
+
+          label {
+            @include mx.flex($justify: space-between);
+            width: 100%;
+            gap: 5px;
+            font-size: var.$fs-text;
+
+            input,
+            textarea {
+              flex-basis: 70%;
+            }
+          }
+          select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 100%;
+            padding: 0.5rem 0.6rem;
+            border: none;
+            border-radius: 0.3rem;
+            background-color: var.$bg-200;
+            font-size: var.$fs-text;
+            margin: 8px 0;
+            color: var.$text-100;
+            transition: box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+
+            &:focus {
+              outline: none;
+              box-shadow: 1px 0px 6px 0px #61398fa6;
+            }
+          }
+        }
+      }
+     .update-order {
+          h3 {
+            margin: 1rem 0;
+            }
+        form {
+          label {
+            @include mx.flex($justify: space-between);
+            width: 100%;
+            gap: 5px;
+            font-size: var.$fs-text;
+
+            input,
+            textarea {
+              flex-basis: 70%;
+            }
+          }
+          select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 100%;
+            padding: 0.5rem 0.6rem;
+            border: none;
+            border-radius: 0.3rem;
+            background-color: var.$bg-200;
+            font-size: var.$fs-text;
+            margin: 8px 0;
+            color: var.$text-100;
+            transition: box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+
+            &:focus {
+              outline: none;
+              box-shadow: 1px 0px 6px 0px #61398fa6;
+            }
+ 
+        }
+     }
+    }
+  }
+  }
+}

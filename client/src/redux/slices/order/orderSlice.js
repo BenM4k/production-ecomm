@@ -45,8 +45,16 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         { type: "user", id: "LIST" },
       ],
     }),
+    updateOrder: builder.mutation({
+      query: (order) => ({
+        url: `${ENDPOINT}/${order?.id}`,
+        method: "PUT",
+        body: { ...order },
+      }),
+      invalidatesTags: [{ type: "order", id: "LIST" }],
+    }),
     deleteOrder: builder.mutation({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `${ENDPOINT}/${id}`,
         method: "DELETE",
         body: { id },
@@ -59,6 +67,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 export const {
   useAddOrderMutation,
   useDeleteOrderMutation,
+  useUpdateOrderMutation,
   useGetOrdersQuery,
   useGetSingleOrderQuery,
 } = orderApiSlice;

@@ -8,6 +8,7 @@ import UpdateCategory from "../../components/modals/UpdateCategory";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import { NavLink } from "react-router-dom";
+import Modal from "../../components/modals/Modal";
 
 const HandleCategories = () => {
   const categories = useSelector(selectCategoriesResult)?.data?.categories;
@@ -53,9 +54,11 @@ const HandleCategories = () => {
           <AddCategory />
         </div>
       </div>
-      <div className={id ? "update-category" : ""}>
-        {id && <UpdateCategory category={cat} setId={setId} />}
-      </div>
+      {id && (
+        <Modal isOpen={cat} onClose={() => setId(null)}>
+          <UpdateCategory category={cat} setId={setId} />
+        </Modal>
+      )}
     </>
   );
 };

@@ -9,6 +9,7 @@ import {
   getStoreProducts,
   updateProduct,
 } from "../handlers/handleProducts";
+import { isAdmin } from "../utils/auth";
 
 const router = express.Router();
 
@@ -22,6 +23,7 @@ router.post(
   body("image").isString(),
   body("quantity").isNumeric(),
   handleInputErrors,
+  isAdmin,
   createProduct
 );
 router.get("/products/:id", getProduct);
@@ -33,8 +35,9 @@ router.put(
   body("image").optional().isString(),
   body("quantity").optional().isNumeric(),
   handleInputErrors,
+  isAdmin,
   updateProduct
 );
-router.delete("/products/:id", deleteProduct);
+router.delete("/products/:id", isAdmin, deleteProduct);
 
 export default router;

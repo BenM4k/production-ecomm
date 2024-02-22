@@ -58,42 +58,4 @@
       }
     }
   }
-
-  .update-category {
-    height: 100%;
-    padding: 2rem;
-    box-shadow: 1px 4px 6px 2px #dfd8d8;
-    border-radius: 5px;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-
-    h2 {
-      margin: 10px 0;
-
-      span {
-        color: var.$primary-200;
-      }
-    }
-
-    form {
-      @include mx.flex(
-        $justify: space-between,
-        $dir: column,
-        $align: flex-start
-      );
-
-      label {
-        width: 100%;
-      }
-      textarea {
-        width: 100%;
-        height: 90px;
-      }
-    }
-    .close-cat {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-    }
-  }
 }

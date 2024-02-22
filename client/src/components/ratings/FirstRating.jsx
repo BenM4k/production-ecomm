@@ -18,7 +18,7 @@ const FirstRating = ({ reviews }) => {
 
   return (
     <>
-      <div className="stars">{renderStars(Math.round(averageRating))}</div>
+      <span className="stars">{renderStars(Math.round(averageRating))}</span>
     </>
   );
 };

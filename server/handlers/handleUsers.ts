@@ -30,6 +30,8 @@ export const getUsers = async (req, res) => {
         first_name: true,
         last_name: true,
         email: true,
+        role: true,
+        id: true,
         Review: true,
         Payment: true,
         Order: true,
@@ -55,6 +57,8 @@ export const getUser = async (req, res) => {
         first_name: true,
         last_name: true,
         email: true,
+        role: true,
+        id: true,
         Review: true,
         Payment: true,
         Order: true,
@@ -70,7 +74,7 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { email, password, first_name, last_name } = req.body;
+  const { email, first_name, last_name, role } = req.body;
   try {
     const user = await prisma.user.update({
       where: {
@@ -78,7 +82,7 @@ export const updateUser = async (req, res) => {
       },
       data: {
         email: email,
-        password: password,
+        role: role,
         first_name: first_name,
         last_name: last_name,
       },
@@ -92,7 +96,7 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.params);
   try {
     const user = await prisma.user.delete({
       where: {

@@ -22,7 +22,7 @@ const PersistentLogin = () => {
       }
     };
 
-    if (!token && !isLoading) {
+    if (!token) {
       verifyRefreshToken();
     }
   }, [data, token, isLoading, dispatch]);
