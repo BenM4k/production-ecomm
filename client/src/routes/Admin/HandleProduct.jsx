@@ -33,15 +33,20 @@ const HandleProducts = () => {
       <div className="products-body">
         <div className="dash-head">
           <h2>Products List</h2>
-          <ul>
+          <ul className="admin-products-title">
+            <li className="title-name">product name</li>
+            <li className="title-price">price</li>
+            <li className="title-actions">actions</li>
+          </ul>
+          <ul className="admin-products-body">
             {products?.map((product) => (
               <li key={product.id}>
                 <div className="details">
                   <NavLink to={`/products/${product.id}`}>
                     <p>{product.name}</p>
                   </NavLink>
-                  <span>${product.price}</span>
                 </div>
+                <span>${product.price}</span>
                 <div className="buttons">
                   <PrimaryButton buttonFn={() => setProductToUpdate(product)}>
                     <FaEdit />

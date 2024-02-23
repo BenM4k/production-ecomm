@@ -37,32 +37,29 @@ const HandleOrders = () => {
 
   return (
     <>
-      <ul>
+      <ul className="admin-orders-title">
+        <li className="order-id">id</li>
+        <li className="order-address">address</li>
+        <li className="order-tn">tracking number</li>
+        <li className="order-status">status</li>
+        <li className="order-total">total</li>
+        <li className="order-actions">actions</li>
+      </ul>
+      <ul className="admin-orders-body">
         {orders.length ? (
           orders?.map((order) => (
             <li key={order?.id} className="order-list">
               <div className="order-id ">
-                <h4>id</h4>
                 <NavLink to={`/orders/${order.id}`}>{order.id}</NavLink>
               </div>
-              <div className="order-address ">
-                <h4>Address</h4>
-                <p>{order.Shipping[0].address}</p>
-              </div>
-              <div className="order-track ">
-                <h4>Tracking_number</h4>
-                <p>{order.Shipping[0].tracking_number}</p>
-              </div>
-              <div
-                className={`order-status ${order.order_status.toLowerCase()}`}
-              >
-                <h4>Status</h4>
-                <p>{order.order_status}</p>
-              </div>
-              <div className="order-total ">
-                <h4>Total</h4>
-                <p>${order.total_amount}</p>
-              </div>
+              <p className="order-address ">{order.Shipping[0].address}</p>
+              <p className="order-track ">
+                {order.Shipping[0].tracking_number}
+              </p>
+              <p className={`order-status ${order.order_status.toLowerCase()}`}>
+                {order.order_status}
+              </p>
+              <p className="order-total ">${order.total_amount}</p>
               <div className="buttons">
                 <PrimaryButton buttonFn={() => handleEditOrder(order)}>
                   <FaEdit />

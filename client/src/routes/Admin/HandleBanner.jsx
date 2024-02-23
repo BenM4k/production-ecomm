@@ -1,13 +1,9 @@
 import { FiDelete } from "react-icons/fi";
 import { FaEdit, FaImage } from "react-icons/fa";
 import AddBanner from "../../components/adders/AddBanner";
-import { selectBannersResult } from "../../redux/slices/banners/banners";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-const HandleBanners = () => {
-  const banners = useSelector(selectBannersResult).data?.banners;
-
+const HandleBanners = ({ banners }) => {
   useEffect(() => {
     document.title = "Banners List";
   });

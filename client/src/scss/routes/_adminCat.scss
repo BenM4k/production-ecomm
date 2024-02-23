@@ -2,30 +2,54 @@
 @use "../reset/mixins" as mx;
 
 .admin-cat {
-  padding: 1rem;
+  padding: 2rem;
 
   @include mx.flex($justify: space-between, $align: flex-start);
 
   .cat-body {
     flex-basis: 60%;
-    .admin-categories {
+    .admin-categories-title {
       margin-top: 1rem;
       @include mx.flex($justify: flex-start);
-      gap: 32px;
+      background-color: var.$primary-200;
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 0.3rem;
+
+      .cat-name {
+        flex-basis: 30%;
+      }
+
+      .cat-desc {
+        flex-basis: 50%;
+        margin-right: 8px;
+      }
+    }
+
+    .admin-categories-body {
+      @include mx.flex($justify: flex-start, $dir: column);
 
       li {
         box-shadow: 1px 4px 6px 2px #dfd8d8;
-        padding: 1rem;
-        flex-basis: 17%;
-        @include mx.flex($dir: column);
-        gap: 8px;
+        margin-top: 0.5rem;
+        padding: 0.4rem;
+        width: 100%;
+        @include mx.flex($justify: flex-start);
         border-radius: 5px;
 
         a {
           color: var.$text-100;
+          flex-basis: 30%;
+          text-decoration: underline;
         }
-        h3 {
-          font-size: var.$fs-h6;
+
+        p {
+          flex-basis: 50%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 60px;
+          margin-right: 8px;
         }
         .buttons {
           @include mx.flex();
@@ -33,27 +57,24 @@
         }
       }
     }
+  }
+  .add-category {
+    margin-top: 1rem;
+    flex-basis: 35%;
 
-    .add-category {
-      margin-top: 2rem;
+    form {
+      width: 100%;
+      @include mx.flex($justify: flex-start, $dir: column, $align: flex-start);
+      gap: 10px;
+      label {
+        width: 100%;
+        font-size: var.$fs-text;
+        text-align: start;
+        @include mx.flex($dir: column, $align: flex-start);
 
-      form {
-        @include mx.flex(
-          $justify: flex-start,
-          $dir: column,
-          $align: flex-start
-        );
-        gap: 10px;
-        label {
-          width: 40%;
-          font-size: var.$fs-text;
-          text-align: start;
-          @include mx.flex($dir: column, $align: flex-start);
-
-          input,
-          textarea {
-            width: 100%;
-          }
+        input,
+        textarea {
+          width: 100%;
         }
       }
     }

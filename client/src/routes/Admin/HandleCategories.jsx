@@ -33,12 +33,18 @@ const HandleCategories = () => {
         <div className="dash-head">
           <h2>Categories List</h2>
         </div>
-        <ul className="admin-categories">
+        <ul className="admin-categories-title">
+          <li className="cat-name">Name</li>
+          <li className="cat-desc">Description</li>
+          <li className="cat-actions">Actions</li>
+        </ul>
+        <ul className="admin-categories-body">
           {categories.map((category) => (
             <li key={category.id}>
               <NavLink to={`/categories/${category.id}`}>
-                <h3>{category.name}</h3>
+                <h4>{category.name}</h4>
               </NavLink>
+              <p>{category.description}</p>
               <div className="buttons">
                 <PrimaryButton buttonFn={() => setId(category?.id)}>
                   <FaEdit />
@@ -50,9 +56,9 @@ const HandleCategories = () => {
             </li>
           ))}
         </ul>
-        <div className="add-category">
-          <AddCategory />
-        </div>
+      </div>
+      <div className="add-category">
+        <AddCategory />
       </div>
       {id && (
         <Modal isOpen={cat} onClose={() => setId(null)}>

@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectUsersResult } from "../../redux/slices/appUsers/appUsersSlice";
+import { useDispatch } from "react-redux";
+import { useGetUsersQuery } from "../../redux/slices/appUsers/appUsersSlice";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
@@ -14,7 +14,8 @@ import UpdateUser from "../../components/modals/UpdateUser";
 import Modal from "../../components/modals/Modal";
 
 const HandleUsers = () => {
-  const users = useSelector(selectUsersResult).data?.users;
+  const { data, isLoading, isError } = useGetUsersQuery();
+  const users = data?.users;
   const [deleteUser] = useDeleteUserMutation();
   const dispatch = useDispatch();
 

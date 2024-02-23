@@ -36,27 +36,6 @@ const Home = () => {
       <div className="featured">
         <HomeProducts />
       </div>
-      <div className="testimonial">
-        <div className="stars">
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiOutlineStar />
-        </div>
-        <h3>
-          Our experience with this e-commerce website has been amazing. The
-          platform is user-friendly and the customer support is top-notch.
-        </h3>
-        <div className="brand">
-          <img src="" alt="" />
-          <p>John Doe</p>
-          <p>ABC, Company</p>
-          <div className="">
-            <img src="" alt="" />
-          </div>
-        </div>
-      </div>
     </section>
   );
 };

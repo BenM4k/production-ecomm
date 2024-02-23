@@ -1,0 +1,41 @@
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
+
+.order-page {
+  padding: 3rem;
+  @include mx.flex($justify: space-between, $align: flex-start);
+
+  h2 {
+    color: var.$primary-200;
+    font-weight: 400;
+    flex-basis: 80%;
+  }
+
+  .bill {
+    padding: 1rem;
+    background-color: #fff;
+    margin-top: 1rem;
+    border-radius: 0.3rem;
+    width: 45%;
+    @include mx.flex($justify: space-between);
+
+    label {
+      flex-basis: 45%;
+      margin-top: 0.5rem;
+      font-size: var.$fs-text;
+
+      input {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 0.3rem;
+        border: none;
+        background-color: var.$accent-100;
+      }
+    }
+
+    button {
+      width: 12%;
+      margin-top: 1rem;
+    }
+  }
+}

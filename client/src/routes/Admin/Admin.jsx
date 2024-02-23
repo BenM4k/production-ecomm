@@ -1,4 +1,5 @@
 import { Suspense, lazy, useState } from "react";
+import { useGetBannersQuery } from "../../redux/slices/banners/banners";
 
 import Records from "./Records";
 import NavList from "./NavList";
@@ -12,6 +13,10 @@ const HandleReviews = lazy(() => import("./HandleReviews"));
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState(() => "users");
+
+  //datas
+  const { data: bannersData } = useGetBannersQuery();
+  const banners = bannersData?.banners;
 
   return (
     <div className="admin-wrapper">
@@ -47,7 +52,7 @@ const Admin = () => {
           {activeTab === "banners" && (
             <div className="dash-banners">
               <Suspense fallback={<h1>Loading...</h1>}>
-                <HandleBanners />
+                <HandleBanners banners={banners} />
               </Suspense>
             </div>
           )}

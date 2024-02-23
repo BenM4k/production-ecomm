@@ -58,9 +58,25 @@ const Order = () => {
   };
 
   return (
-    <div>
-      <h2>Order Page</h2>
-      <form onSubmit={handleSubmitOrder}>
+    <div className="order-page">
+      <h2>Billing address</h2>
+      <form onSubmit={handleSubmitOrder} className="bill">
+        <label htmlFor="first_name">
+          First Name
+          <input type="text" id="first_name" name="first_name" />
+        </label>
+        <label htmlFor="last_name">
+          Last Name
+          <input type="text" id="last-name" name="last_name" />
+        </label>
+        <label htmlFor="email">
+          Email
+          <input type="text" id="email" name="email" />
+        </label>
+        <label htmlFor="mobile">
+          Mobile No
+          <input type="text" id="mobile" name="mobile" />
+        </label>
         <label htmlFor="">
           Enter your address:
           <input
@@ -73,8 +89,50 @@ const Order = () => {
             required
           />
         </label>
+        <label htmlFor="address_2">
+          Address 2
+          <input type="text" id="address_2" name="address_2" />
+        </label>
+        <label htmlFor="country">
+          Country
+          <input type="text" id="country" name="country" />
+        </label>
+        <label htmlFor="city">
+          City
+          <input type="text" id="city" name="city" />
+        </label>
+        <label htmlFor="state">
+          State
+          <input type="text" id="state" name="state" />
+        </label>
+        <label htmlFor="postal_code">
+          Postal Code
+          <input type="text" id="postal_code" name="postal_code" />
+        </label>
         <button>Order now</button>
       </form>
+      <div className="order-payment">
+        <div className="order-det">
+          <h2>Order total</h2>
+        </div>
+        <div className="payment-det">
+          <h2>Payment</h2>
+          <form action="">
+            <label htmlFor="">
+              <input type="radio" name="" id="" />
+              Paypal
+            </label>
+            <label htmlFor="">
+              <input type="radio" name="" id="" />
+              Cash on delivery
+            </label>
+            <label htmlFor="">
+              <input type="radio" name="" id="" />
+              bank
+            </label>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

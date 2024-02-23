@@ -10,24 +10,18 @@ import {
 import { removeToCart } from "../../redux/slices/users/userSlice";
 import phone from "../../assets/phone_1.png";
 import { useDispatch } from "react-redux";
+import CloseButton from "../../components/buttons/CloseButton";
 
 const CartProduct = ({ product }) => {
   const dispatch = useDispatch();
   return (
     <>
       <li key={product.id}>
-        <button
-          type="button"
-          className="delete-cart-item"
-          onClick={() => {
-            dispatch(removeToCart(product));
-          }}
-        >
-          <AiFillCloseCircle />
-        </button>
-        <img src={phone} alt={product.name} loading="lazy" />
-        <h3>{product.name}</h3>
-        <p>${product.price}</p>
+        <div className="store-product">
+          <img src={phone} alt={product.name} loading="lazy" />
+          {product.name}
+        </div>
+        <div className="product-price">${product.price}</div>
         <div className="item-count">
           <button
             type="button"
@@ -46,6 +40,16 @@ const CartProduct = ({ product }) => {
           >
             <AiOutlinePlus />
           </button>
+        </div>
+        <div className="product-total">
+          ${product.price * product.itemCount}
+        </div>
+        <div className="delete-item">
+          <CloseButton
+            closeFn={() => {
+              dispatch(removeToCart(product));
+            }}
+          />
         </div>
       </li>
     </>

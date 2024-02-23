@@ -6,16 +6,52 @@
 
   .orders {
     height: 600px;
+    .admin-orders-title {
+      @include mx.flex($justify: flex-start);
+      gap: 16px;
+      background-color: var.$primary-200;
+      color: #fff;
+      padding: 0.5rem;
+      text-transform: capitalize;
+      margin-top: 0.6rem;
 
-    ul {
+      .order-id {
+        flex-basis: 7%;
+      }
+
+      .order-address {
+        flex-basis: 16%;
+      }
+
+      .order-tn {
+        flex-basis: 32%;
+      }
+
+      .order-status {
+        flex-basis: 10%;
+      }
+
+      .order-total {
+        flex-basis: 10%;
+      }
+
+      .order-actions {
+        @include mx.flex();
+        gap: 8px;
+      }
+    }
+
+    .admin-orders-body {
       @include mx.flex($dir: column);
       gap: 8px;
-      margin-top: 2rem;
       li {
         @include mx.flex($justify: flex-start);
         font-size: var.$fs-text;
         gap: 16px;
+        padding: 0.5rem;
+        margin-top: 0.3rem;
         width: 100%;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 
         .order-id {
           white-space: nowrap;
@@ -42,27 +78,19 @@
 
           &.pending,
           &.cancelled {
-            p {
-              color: red;
-            }
+            color: red;
           }
 
           &.paid,
           &.shipped,
           &.delivered {
-            p {
-              color: green;
-            }
+            color: green;
           }
         }
 
         .order-total {
           flex-basis: 10%;
-
-          p {
-            color: green;
-            font-weight: bold;
-          }
+          color: green;
         }
 
         .buttons {

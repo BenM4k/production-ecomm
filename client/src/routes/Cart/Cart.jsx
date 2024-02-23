@@ -20,28 +20,59 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      {cart.length ? (
-        <ul className="cart-list">
-          {cart?.map((product) => (
-            <CartProduct product={product} key={product.id} />
-          ))}
+      <div className="cart-list">
+        <ul className="list-head">
+          <li className="head-product">Product</li>
+          <li className="head-price">Price</li>
+          <li className="head-quantity">Quantity</li>
+          <li className="head-total">Total</li>
+          <li className="head-remove">remove</li>
         </ul>
-      ) : (
-        <h2>Your cart is empty</h2>
-      )}
-
-      <div className="total">
-        {cart?.length ? (
-          <p>
-            Total : <span>${total.toFixed(2)}</span>
-          </p>
-        ) : (
-          <span />
-        )}
+        <ul className="list-body">
+          {cart.length ? (
+            cart?.map((product) => (
+              <CartProduct product={product} key={product.id} />
+            ))
+          ) : (
+            <li>
+              <div className="empty-cart">Your cart is empty</div>
+            </li>
+          )}
+        </ul>
       </div>
-      <button type="button" className="buy-now">
-        {cart?.length ? <NavLink to="/shipping">Buy now</NavLink> : <span />}
-      </button>
+
+      <div className="summary">
+        <h2>
+          Cart Summary <span />
+        </h2>
+        <div className="summary-content">
+          {cart?.length ? (
+            <>
+              <p>
+                Subtotal : <span>${total.toFixed(2)}</span>
+              </p>
+              <p>
+                Shipping : <span>${0}</span>
+              </p>
+              <p>
+                Taxes : <span>${0}</span>
+              </p>
+              <p>
+                Total: <span>{total.toFixed(2)}</span>
+              </p>
+            </>
+          ) : (
+            <span />
+          )}
+          <button type="button" className="buy-now">
+            {cart?.length ? (
+              <NavLink to="/shipping">Buy now</NavLink>
+            ) : (
+              <span />
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
