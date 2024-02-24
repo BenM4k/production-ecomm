@@ -87,83 +87,6 @@
         @include mx.flex;
       }
     }
-
-    // li {
-    //   height: 90%;
-    //   position: relative;
-    //   width: 300px;
-    //   margin-right: 30px;
-    //   display: inline-block;
-    //   flex-direction: column;
-    //   list-style-type: none;
-    //   overflow: hidden;
-    //   background-color: rgba(255, 255, 255, 0.5);
-    //   padding: 0.5rem;
-    //   border-radius: 1rem;
-
-    //   .delete-cart-item {
-    //     position: absolute;
-    //     right: 0;
-    //     border: none;
-    //     background: none;
-    //     width: fit-content;
-    //     height: fit-content;
-
-    //     svg {
-    //       font-size: 1.7rem;
-    //       cursor: pointer;
-    //       float: right;
-    //       margin-right: 5px;
-    //       color: #313bac;
-
-    //       &:active {
-    //         opacity: 0.4;
-    //       }
-    //     }
-    //   }
-
-    //   img {
-    //     height: 70%;
-    //     margin-top: 1rem;
-    //   }
-
-    //   h3 {
-    //     margin-top: auto;
-    //     text-align: center;
-    //   }
-
-    //   p {
-    //     color: #313bac;
-    //     font-weight: bold;
-    //     margin: 0.2rem 0;
-    //     text-align: center;
-    //   }
-
-    //   .item-count {
-    //     margin-top: 1rem;
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-
-    //     button {
-    //       width: fit-content;
-    //       padding: 0.3rem 0.6rem;
-    //       border-radius: 0.3rem;
-    //       border: none;
-    //       background-color: var.$primary-200;
-    //       cursor: pointer;
-
-    //       svg {
-    //         width: 100%;
-    //         color: #fff;
-    //       }
-    //     }
-
-    //     span {
-    //       margin: 0 0.5rem;
-    //     }
-    //   }
-    // }
   }
 
   .summary {
@@ -213,6 +136,46 @@
 
         &:active {
           opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  @include mx.desktop {
+    .cart-list {
+      flex-basis: 65%;
+
+      .list-head {
+        li {
+          &:first-child {
+            flex-basis: 28%;
+          }
+          &:last-child {
+            flex-basis: 10%;
+          }
+        }
+      }
+
+      .list-body {
+        li {
+          .store-product {
+            flex-basis: 28%;
+          }
+          .delete-item {
+            flex-basis: 10%;
+          }
+        }
+      }
+    }
+
+    .summary {
+      flex-basis: 25%;
+
+      h2 {
+        // text-transform: uppercase;
+        font-size: var.$fs-h6;
+        span {
+          flex-basis: 50%;
         }
       }
     }

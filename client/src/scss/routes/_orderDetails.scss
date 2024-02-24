@@ -105,4 +105,8 @@
       }
     }
   }
+
+  @include mx.desktop {
+    padding: 2rem 128px;
+  }
 }

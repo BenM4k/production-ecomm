@@ -169,4 +169,40 @@
       }
     }
   }
+
+  @include mx.desktop {
+    .left-pane {
+      h2 {
+        font-size: var.$fs-text;
+      }
+    }
+
+    .right-pane {
+      .store-search {
+        form {
+          input {
+            width: 80%;
+          }
+        }
+      }
+      .product-list {
+        .product {
+          flex-basis: 29%;
+          height: 290px;
+
+          .product-link {
+            .product-image {
+              height: 30px;
+            }
+          }
+
+          .product-footer {
+            button {
+              padding: 0.5rem 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }

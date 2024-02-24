@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials, logOut } from "../slices/users/userSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://production-ecomm-api.onrender.com',
-  // baseUrl: "http://localhost:3000",
+  // baseUrl: 'https://production-ecomm-api.onrender.com',
+  baseUrl: "http://localhost:3000",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

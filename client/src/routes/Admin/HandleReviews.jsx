@@ -21,7 +21,7 @@ const HandleReviews = () => {
           <li key={review.id}>
             <div>
               <p className="name">
-                {review.user?.first_name} {review.user.last_name}
+                {review.user?.first_name} {review.user?.last_name}
               </p>
               <p>{review.product?.name}</p>
               <p>comment: {review.comment}</p>

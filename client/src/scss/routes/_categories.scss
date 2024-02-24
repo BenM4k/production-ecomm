@@ -36,4 +36,13 @@
       }
     }
   }
+
+  @include mx.desktop {
+    padding: 16px 128px;
+    ul {
+      li {
+        flex-basis: 20%;
+      }
+    }
+  }
 }

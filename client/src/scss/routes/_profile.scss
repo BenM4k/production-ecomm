@@ -161,4 +161,17 @@
       }
     }
   }
+
+  @include mx.desktop {
+    padding: 2rem 128px;
+    .profile-container {
+      .user-nav {
+        min-height: 550px;
+      }
+      .user-details,
+      .user-orders {
+        height: 550px;
+      }
+    }
+  }
 }

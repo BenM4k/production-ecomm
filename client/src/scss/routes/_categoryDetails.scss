@@ -46,4 +46,16 @@
       }
     }
   }
+
+  @include mx.desktop {
+    padding: 16px 128px;
+
+    .desc {
+      line-height: 1.7;
+    }
+
+    ul {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
 }

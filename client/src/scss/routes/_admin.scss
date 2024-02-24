@@ -1,64 +1,87 @@
-@use '../reset/variables' as var;
-@use '../reset/mixins' as mx;
+@use "../reset/variables" as var;
+@use "../reset/mixins" as mx;
 
 .admin-wrapper {
-    @include mx.flex($justify: space-between);
-    height: 92vh;
+  @include mx.flex($justify: space-between);
+  height: 92vh;
 
-    .nav-list {
-        @include mx.flex($dir: column, $justify: flex-start);
-        padding: 1rem;
-        background-color: var.$bg-200;
-        flex-basis: 13%;
+  .nav-list {
+    @include mx.flex($dir: column, $justify: flex-start);
+    padding: 1rem;
+    background-color: var.$bg-200;
+    flex-basis: 13%;
+    height: 100%;
+
+    button {
+      background: none;
+      border: none;
+      display: flex;
+      width: 100%;
+      flex-basis: 5%;
+      @include mx.flex($justify: flex-start);
+      padding: 1rem;
+      gap: 16px;
+
+      &:hover {
+        background-color: var.$bg-300;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      }
+    }
+  }
+
+  .content {
+    @include mx.flex($dir: column, $justify: space-between);
+    flex-basis: 87%;
+    height: 100%;
+    padding: 1rem;
+    background-color: var.$bg-200;
+
+    .content-header {
+      @include mx.flex($justify: space-between);
+      width: 100%;
+      flex-basis: 15%;
+
+      li {
+        background-color: var.$bg-300;
+        flex-basis: 15%;
         height: 100%;
+        @include mx.flex($dir: column);
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        font-size: var.$fs-text;
 
-        button {
-            background: none;
-            border: none;
-            display: flex;
-            width: 100%;
-            flex-basis: 5%;
-            @include mx.flex($justify: flex-start);
-            padding: 1rem;
-            gap: 16px;
-
-            &:hover {
-                background-color: var.$bg-300;
-                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-            }
+        svg {
+          font-size: 32px;
         }
+      }
+    }
+
+    .content-body {
+      width: 100%;
+      flex-basis: 82%;
+      background-color: var.$bg-300;
+    }
+  }
+
+  @include mx.desktop {
+    .nav-list {
+      padding: 0.5rem;
+
+      button {
+        padding: 0.7rem;
+      }
     }
 
     .content {
-        @include mx.flex($dir: column, $justify: space-between);
-        flex-basis: 87%;
-        height: 100%;
-        padding: 1rem;
-        background-color: var.$bg-200;
+      padding: 0.5rem;
 
-        .content-header {
-            @include mx.flex($justify: space-between);
-            width: 100%;
-            flex-basis: 15%;
-
-            li {
-                background-color: var.$bg-300;
-                flex-basis: 15%;
-                height: 100%;
-                @include mx.flex($dir: column);
-                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-                font-size: var.$fs-text;
-
-                svg {
-                    font-size: 32px;
-                }
-            }
+      .content-header {
+        li {
+          svg {
+            font-size: 30px;
+            padding: 0.3rem;
+          }
         }
-
-        .content-body {
-            width: 100%;
-            flex-basis: 82%;
-            background-color: var.$bg-300;
-        }
+      }
     }
+  }
 }

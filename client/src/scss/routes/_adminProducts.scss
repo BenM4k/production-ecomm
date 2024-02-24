@@ -124,4 +124,12 @@
       }
     }
   }
+
+  @include mx.desktop {
+    .products-body {
+      .dash-head {
+        height: 500px;
+      }
+    }
+  }
 }

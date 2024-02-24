@@ -36,4 +36,14 @@
       }
     }
   }
+
+  @include mx.desktop {
+    .user-list {
+      height: 400px;
+
+      .user {
+        flex-basis: 15%;
+      }
+    }
+  }
 }

@@ -100,4 +100,16 @@
       }
     }
   }
+
+  @include mx.desktop {
+    .orders {
+      height: 400px;
+
+      .admin-orders-title {
+        .order-id {
+          flex-basis: 10.5%;
+        }
+      }
+    }
+  }
 }

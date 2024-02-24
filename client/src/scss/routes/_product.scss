@@ -234,4 +234,14 @@
       width: 240px;
     }
   }
+
+  @include mx.desktop {
+    padding: 0 128px;
+
+    .feedback {
+      ul {
+        flex-basis: 60%;
+      }
+    }
+  }
 }

@@ -27,7 +27,7 @@ const CategoryDetail = () => {
       </div>
     );
 
-  if (products.length === 0) {
+  if (products?.length === 0) {
     return (
       <div className="category-detail">
         <h2>{category.name}</h2>
@@ -41,7 +41,7 @@ const CategoryDetail = () => {
       <h2>{category.name}</h2>
       <p className="desc">{category.description}</p>
       <ul>
-        {products.map((product) => (
+        {products?.map((product) => (
           <li key={product.id}>
             <Product product={product} />
           </li>

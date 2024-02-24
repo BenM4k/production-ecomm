@@ -10,7 +10,8 @@
   }
 
   ul {
-    @include mx.flex($justify: space-between, $align: flex-start);
+    @include mx.flex($justify: flex-start, $align: flex-start);
+    gap: 32px;
     height: 600px;
     padding: 1rem;
     overflow-y: scroll;
@@ -41,6 +42,13 @@
           }
         }
       }
+    }
+  }
+
+  @include mx.desktop {
+    ul {
+      height: 400px;
+      gap: 16px;
     }
   }
 }
