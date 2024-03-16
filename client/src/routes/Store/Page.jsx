@@ -11,9 +11,14 @@ const Pagineted = ({
   setCurrentPage,
   isError,
   isLoading,
+  searchItem,
 }) => {
   const dispatch = useDispatch();
   const totalPages = Math.ceil(total / itemsPerPage);
+
+  const searchedProducts = searchItem
+    ? items.filter((item) => item.name.toLowerCase().includes(searchItem))
+    : items;
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -36,7 +41,7 @@ const Pagineted = ({
     <div className="main-container">
       <ul className="product-list">
         {items ? (
-          items?.map((item) => (
+          searchedProducts?.map((item) => (
             <li key={item.id} className="product">
               <NavLink
                 to={`/products/${item.id}`}

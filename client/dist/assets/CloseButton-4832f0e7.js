@@ -1,0 +1,1 @@
+import{j as t,L as e}from"./index-1bee27aa.js";const n=({closeFn:s})=>t.jsx(t.Fragment,{children:t.jsx("button",{className:"close-btn",type:"button",onClick:()=>s(),children:t.jsx(e,{})})});export{n as C};

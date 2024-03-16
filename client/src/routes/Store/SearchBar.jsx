@@ -1,13 +1,31 @@
 import { TbCategory } from "react-icons/tb";
 
 import PrimaryButton from "../../components/buttons/PrimaryButton";
+import { useEffect, useState } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({ onChange }) => {
+  const [searchItem, setSearchItem] = useState("");
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      onChange(searchItem);
+    }, 500);
+
+    return () => {
+      clearTimeout(debounceTimer);
+    };
+  }, [searchItem, onChange]);
+
   return (
     <div className="store-search">
       <TbCategory />
       <form action="">
-        <input type="text" placeholder="Search product" />
+        <input
+          type="text"
+          placeholder="Search product"
+          value={searchItem}
+          onChange={(e) => setSearchItem(e.target.value)}
+        />
         <PrimaryButton>search</PrimaryButton>
       </form>
       <select name="" id="">

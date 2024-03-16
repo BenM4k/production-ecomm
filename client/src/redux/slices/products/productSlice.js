@@ -55,7 +55,8 @@ export const productApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: (arg) => [{ type: "product", id: arg.id }],
     }),
     getStoreProduct: builder.query({
-      query: (page) => `/api/v1/store-products?page=${page}&pageSize=12`,
+      query: ({ page, range }) =>
+        `/api/v1/store-products?page=${page}&pageSize=9&range=${range}`,
       providesTags: (result) => {
         if (result && Array.isArray(result.products)) {
           const productIds = result.products.map((product) => product.id);

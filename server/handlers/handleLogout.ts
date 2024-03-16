@@ -36,7 +36,7 @@ const handleLogout = async (req, res) => {
     });
 
     res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
-    res.sendStatus(204);
+    res.status(200).json({ message: "logged out successfully" });
   } catch (error) {
     console.log("Error logging out user", error);
     res.status(500).json({ error: "Error logging out user" });

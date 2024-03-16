@@ -25,10 +25,12 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await logout().unwrap();
-      dispatch(logOut());
-      navigate("/login");
-      dispatch(setNotice("Logged out"));
+      const logoutData = await logout().unwrap();
+      if (logoutData.message) {
+        dispatch(logOut());
+        navigate("/login");
+        dispatch(setNotice("Logged out"));
+      }
     } catch (e) {
       dispatch(setError(e.message));
       console.log(e);

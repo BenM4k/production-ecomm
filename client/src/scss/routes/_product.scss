@@ -194,7 +194,8 @@
       margin-bottom: 3rem;
     }
     ul {
-      @include mx.flex($justify: space-around);
+      @include mx.flex;
+      gap: 16px;
       width: 100%;
 
       li {

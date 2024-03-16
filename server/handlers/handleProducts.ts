@@ -48,7 +48,7 @@ export const getProducts = async (req, res) => {
         },
       },
       orderBy: {
-        updatedAt: 'desc',
+        updatedAt: "desc",
       },
     });
 
@@ -156,14 +156,45 @@ export const deleteProduct = async (req, res) => {
 };
 
 export const getStoreProducts = async (req, res) => {
-  const { page, pageSize } = req.query;
-  console.log(page, pageSize);
+  const { page, pageSize, range } = req.query;
+  const productsRange = {
+    all: {
+      lt: 9000,
+      gt: 0,
+    },
+    first: {
+      lt: 200,
+      gt: 0,
+    },
+    sec: {
+      lt: 400,
+      gt: 200,
+    },
+    third: {
+      lt: 600,
+      gt: 400,
+    },
+    fourth: {
+      lt: 800,
+      gt: 600,
+    },
+    fifth: {
+      lt: 9000,
+      gt: 800,
+    },
+  };
 
-  if (page && pageSize) {
+  if (page && pageSize && range) {
     const offset = (page - 1) * pageSize;
     const totalProducts = await prisma.product.count();
     try {
       const storeProducts = await prisma.product.findMany({
+        where: {
+          price: {
+            gt: productsRange[range].gt,
+            lt: productsRange[range].lt,
+          },
+        },
         skip: offset,
         take: parseInt(pageSize),
       });

@@ -16,18 +16,18 @@ const CategoryDetail = () => {
 
   if (isLoading)
     return (
-      <div>
+      <div className="category-detail">
         <h1>Loading...</h1>
       </div>
     );
   if (isError)
     return (
-      <div>
+      <div className="category-detail">
         <h1>Error fetching</h1>
       </div>
     );
 
-  if (products?.length === 0) {
+  if (products && products.length === 0) {
     return (
       <div className="category-detail">
         <h2>{category.name}</h2>

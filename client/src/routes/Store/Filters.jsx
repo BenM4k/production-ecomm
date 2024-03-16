@@ -1,42 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Filters = () => {
+const Filters = ({ ranges, onChange }) => {
+  const [selectedRange, setSelectedRange] = useState("all");
+
+  const handleCheckBoxChange = (ran) => {
+    if (selectedRange === ran) {
+      setSelectedRange(null);
+      onChange(null);
+    } else {
+      setSelectedRange(ran);
+      onChange(ran);
+    }
+  };
   return (
     <>
       <h2>
         Filter by price <span></span>
       </h2>
       <div className="inputs">
-        <div value="">
-          <input type="checkbox" />
-          <span>All price</span>
-          <span>427</span>
-        </div>
-        <div value="">
-          <input type="checkbox" />
-          <span>$0 - $100</span>
-          <span>100</span>
-        </div>
-        <div value="">
-          <input type="checkbox" />
-          <span>$100 - $200</span>
-          <span>30</span>
-        </div>
-        <div value="">
-          <input type="checkbox" />
-          <span>$200 - $300</span>
-          <span>250</span>
-        </div>
-        <div value="">
-          <input type="checkbox" />
-          <span>$300 - $400</span>
-          <span>10</span>
-        </div>
-        <div value="">
-          <input type="checkbox" />
-          <span>$400 - $500</span>
-          <span>37</span>
-        </div>
+        {Object.entries(ranges)?.map(([key, value]) => (
+          <div key={key}>
+            <input
+              type="checkbox"
+              checked={selectedRange === key}
+              onChange={() => handleCheckBoxChange(key)}
+            />
+            <span>
+              {value.lt === 9000 && value.gt === 0
+                ? "All ranges"
+                : value.lt === 9000
+                ? `${value.gt} - Above`
+                : `${value.gt} - ${value.lt}`}
+            </span>
+            <span>{value.total}</span>
+          </div>
+        ))}
       </div>
     </>
   );
